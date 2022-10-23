@@ -16,6 +16,7 @@ dataset_name = "caltech256"
 distortion_type = "pristine"
 exit_type = "bnpool"
 distribution = "predefined"
+pretrained = True
 
 nr_class_dict = {"caltech256": 257}
 
