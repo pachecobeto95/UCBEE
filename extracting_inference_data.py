@@ -2,9 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools
 from tqdm import tqdm
-import os, sys, random
-import argparse
-import itertools, argparse, os, sys, random, logging, config
+import itertools, argparse, os, sys, random, logging, config, torch, torchvision
 
 
 def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distortion_type, distortion_lvl, device):
