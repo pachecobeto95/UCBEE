@@ -16,7 +16,7 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 	model.eval()
 
 	with torch.no_grad():
-		for (data, target) in tqdm(test_loader):
+		for i, (data, target) in tqdm(enumerate(test_loader, 1)):
 
 			data, target = data.to(device), target.to(device)
 
