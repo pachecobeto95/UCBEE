@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import ucb
+from ucb import ucb, reward_function_1
 
 def ucb_experiment(args, df_inf_data, compute_reward, threshold_list, overhead_list, distortion_list, savePath, logPath):	
 	df = df_inf_data[df_inf_data.distortion_type == args.distortion_type]
@@ -13,7 +13,7 @@ def ucb_experiment(args, df_inf_data, compute_reward, threshold_list, overhead_l
 		for overhead in overhead_list:
 			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 
-			results = ucb.ucb(df_temp, threshold_list, overhead, args.n_rounds, args.c, compute_reward, logPath)
+			results = ucb(df_temp, threshold_list, overhead, args.n_rounds, args.c, compute_reward, logPath)
 			ucb.save_results(results, savePath)
 
 
@@ -50,4 +50,4 @@ if (__name__ == "__main__"):
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
 
 
-	ucb_experiment(args, df_inf_data, ucb.reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
+	ucb_experiment(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
