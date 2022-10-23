@@ -5,6 +5,9 @@ from tqdm import tqdm
 from statistics import mode
 from ucb import ucb
 
+def ucb_experiment(df_inf_data, threshold_list, overhead_list, args.n_rounds, args.c, savePath, logPath)
+	print("OK")
+
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser(description='UCB using MobileNet')
@@ -38,4 +41,4 @@ if __name__ == "__main__":
 
 	logging.basicConfig(level=logging.DEBUG, filename=logPath, filemode="a+", format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-	ucb_experiment(df_inf_data, threshold_list, overhead_list, args.n_rounds, args.c, savePath, logPath, verbose)
+	ucb_experiment(df_inf_data, threshold_list, overhead_list, args.n_rounds, args.c, savePath, logPath)
