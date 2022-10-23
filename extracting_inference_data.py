@@ -16,7 +16,7 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 	model.eval()
 
 	with torch.no_grad():
-		for i, (data, target) in tqdm(enumerate(test_loader, 1)):
+		for i, (data, target) in tqdm(test_loader):
 
 			data, target = data.to(device), target.to(device)
 
@@ -35,7 +35,7 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 			conf_branches_list.append([conf.item() for conf in conf_branches])
 			infered_class_branches_list.append([inf_class.item() for inf_class in infered_class_branches])    
 			correct_list.append([infered_class_branches[i].eq(target.view_as(infered_class_branches[i])).sum().item() for i in range(n_exits)])
-			id_list.append(i)
+			#id_list.append(i)
 			target_list.append(target.item())
 
 			del data, target
@@ -45,8 +45,10 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 	infered_class_branches_list = np.array(infered_class_branches_list)
 	correct_list = np.array(correct_list)
 
-	results = {"distortion_type": distortion_type, "distortion_lvl": distortion_lvl, "p_tar": [p_tar]*len(target_list), 
-	"target": target_list, "id": id_list}
+	#results = {"distortion_type": distortion_type, "distortion_lvl": distortion_lvl, "p_tar": [p_tar]*len(target_list), 
+	#"target": target_list, "id": id_list}
+	results = {"distortion_type": [distortion_type]*len(target_list), "distortion_lvl": [distortion_lvl]*len(target_list), 
+	"p_tar": [p_tar]*len(target_list), "target": target_list}
 	
 	for i in range(n_exits):
 		results.update({"conf_branch_%s"%(i+1): conf_branches_list[:, i],
