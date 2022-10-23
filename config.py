@@ -11,6 +11,7 @@ step_overhead = 0.1
 cuda = True
 dim = 224
 model_name = "alexnet"
+n_branches = 1
 
 nr_class_dict = {"caltech256": 257}
 
