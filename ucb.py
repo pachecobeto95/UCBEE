@@ -45,7 +45,7 @@ def ucb(df, threshold_list, overhead, n_rounds, c, compute_reward, logPath, repo
   cumulative_regret = 0
   
   for n_round in range(n_rounds):
-    idx = random.choice(indices_list)
+    idx = random.choice(indices)
     row = df.iloc[[idx]]
 
     if (n_round < nr_arms):
