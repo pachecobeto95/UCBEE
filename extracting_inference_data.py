@@ -63,7 +63,7 @@ def save_result(result, save_path):
 	df_result.to_csv(save_path)
 
 
-def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_data_path, calib_type, distortion_type, device):
+def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, calib_type, distortion_type, device):
 
 	for distortion_lvl in distortion_lvl_list:
 		print("Distortion Level: %s"%(distortion_lvl))
@@ -87,6 +87,8 @@ def main(args):
 		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	indices_path = os.path.join(config.DIR_NAME, "indices")
+	
+	dataset_path = config.dataset_path_dict[args.dataset_name]
 
 	device = torch.device('cuda' if (torch.cuda.is_available() and args.cuda) else 'cpu')
 
@@ -104,7 +106,7 @@ def main(args):
 	p_tar_list = [0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.]
 	distortion_lvl_list = config.distortion_lvl_dict[args.distortion_type]
 
-	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, args.calib_type, args.distortion_type, device)
+	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, args.calib_type, args.distortion_type, device)
  
 
 if __name__ == "__main__":
