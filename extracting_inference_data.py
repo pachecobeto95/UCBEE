@@ -20,13 +20,13 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 
 			data, target = data.to(device), target.to(device)
 
-			if (model_type == "no_calib"):
+			if (calib_type == "no_calib"):
 				_, conf_branches, infered_class_branches = model.forwardInferenceNoCalib(data)
 
-			elif(model_type == "global_calib"):
+			elif(calib_type == "global_calib"):
 				_, conf_branches, infered_class_branches = model.forwardGlobalCalibration(data)
 
-			elif(model_type == "per_branch_calib"):
+			elif(calib_type == "per_branch_calib"):
 				_, conf_branches, infered_class_branches = model.forwardPerBranchesCalibration(data)
 			
 			else:
