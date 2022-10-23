@@ -73,9 +73,9 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
     inst_regret_list[n_round] = round(inst_regret, 5)
     selected_arm_list[n_round] = round(threshold, 2) 
 
-    if (n_round%report_period == 0):
-      #print("N Round: %s, Overhead: %s"%(n_round, overhead), file=open(logPath, "a"))
-      logging.debug("Distortion Type: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(distortion_type, distortion_lvl, n_round, overhead))
+    #if (n_round%report_period == 0):
+    #print("N Round: %s, Overhead: %s"%(n_round, overhead), file=open(logPath, "a"))
+    print("Distortion Type: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(distortion_type, distortion_lvl, n_round, overhead))
 
   result = {"selected_arm": selected_arm_list, 
   "regret": inst_regret_list, 
