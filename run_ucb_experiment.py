@@ -13,7 +13,7 @@ def ucb_experiment(args, df_inf_data, compute_reward, threshold_list, overhead_l
 		for overhead in overhead_list:
 			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 
-			results = ucb(df_temp, threshold_list, overhead, args.n_rounds, args.c, compute_reward, logPath)
+			results = ucb(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, args.n_rounds, args.c, compute_reward, logPath)
 			ucb.save_results(results, savePath)
 
 
