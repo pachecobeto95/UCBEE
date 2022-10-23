@@ -1,10 +1,8 @@
 import numpy as np
 import pandas as pd
-import itertools
 from tqdm import tqdm
-import os, sys, random
-from statistics import mode
-import argparse
+import os, sys, random, argparse, itertools, logging
+
 
 def reward_function_1(conf_branch, delta_conf, arm, overhead):  
   return delta_conf - overhead if (conf_branch < arm) else 0 
