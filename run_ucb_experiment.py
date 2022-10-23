@@ -5,7 +5,7 @@ from tqdm import tqdm
 from statistics import mode
 from ucb import ucb
 
-def ucb_experiment(df_inf_data, threshold_list, overhead_list, args.n_rounds, args.c, savePath, logPath):
+def ucb_experiment(df_inf_data, threshold_list, overhead_list, n_rounds, args.c, savePath, logPath):
 	print("OK")
 
 if __name__ == "__main__":
