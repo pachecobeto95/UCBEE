@@ -19,3 +19,5 @@ dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech25
 
 indices_path_dict = {"caltech256": os.path.join(DIR_NAME, "indices", "caltech256"),
 "cifar10": os.path.join(DIR_NAME,"indices", "cifar10") }
+
+distortion_type = "pristine"
