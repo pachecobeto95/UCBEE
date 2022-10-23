@@ -2,18 +2,28 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from statistics import mode
 from ucb import ucb
 
-def ucb_experiment(df_inf_data, threshold_list, overhead_list, n_rounds, c, savePath, logPath):
-	print("OK")
+def ucb_experiment(args, df_inf_data, compute_reward, threshold_list, overhead_list, distortion_list, savePath, logPath):	
+	df = df_inf_data[df_inf_data.distortion_type == args.distortion_type]
 
-if __name__ == "__main__":
+	for distortion_lvl in distortion_list:
+		df_temp = df[df.distortion_lvl == distortion_lvl]
 
-	parser = argparse.ArgumentParser(description='UCB using MobileNet')
-	parser.add_argument('--model_id', type=int, default=2, help='Model Id.')
+		for overhead in overhead_list:
+			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+
+			results = ucb.ucb(df_temp, threshold_list, overhead, args.n_rounds, args.c, compute_reward, logPath):
+			ucb.save_results(results, savePath)
+
+
+
+if (__name__ == "__main__"):
+
+	parser = argparse.ArgumentParser(description='UCB on Early-exit Deep Neural Networks.')
+	parser.add_argument('--model_id', type=int, default=config.model_id, help='Model Id.')
 	parser.add_argument('--c', type=float, default=config.c, help='Parameter c.')
-	parser.add_argument('--n_rounds', type=int, default=config.n_rounds, help='Model Id (default: %s)'%(config.n_rounds))
+	parser.add_argument('--n_rounds', type=int, default=config.n_rounds, help='Number of rounds (default: %s)'%(config.n_rounds))
 	parser.add_argument('--distortion_type', type=str, default=config.distortion_type, help='Distortion Type.')
 	parser.add_argument('--n_branches', type=int, default=config.n_branches, help='Number of exit exits.')
 	parser.add_argument('--dataset_name', type=str, default=config.dataset_name, help='Dataset Name.')
@@ -39,6 +49,5 @@ if __name__ == "__main__":
 
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
 
-	logging.basicConfig(level=logging.DEBUG, filename=logPath, filemode="a+", format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-	ucb_experiment(df_inf_data, threshold_list, overhead_list, args.n_rounds, args.c, savePath, logPath)
+	ucb_experiment(args, df_inf_data, ucb.reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
