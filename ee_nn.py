@@ -158,7 +158,7 @@ class Early_Exit_DNN(nn.Module):
 
 		architecture_dnn_model_dict = {"mobilenet": self.early_exit_mobilenet, 
 		"alexnet": self.early_exit_alexnet}
-
+		print(self.model_name)
 		return architecture_dnn_model_dict.get(self.model_name, self.invalid_model)
 
 
