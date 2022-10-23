@@ -12,6 +12,7 @@ cuda = True
 dim = 224
 model_name = "alexnet"
 n_branches = 1
+dataset_name = "caltech256"
 
 nr_class_dict = {"caltech256": 257}
 
