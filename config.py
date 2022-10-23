@@ -18,6 +18,7 @@ exit_type = "bnpool"
 distribution = "predefined"
 pretrained = True
 seed = 42
+batch_size_train = 64
 
 nr_class_dict = {"caltech256": 257}
 

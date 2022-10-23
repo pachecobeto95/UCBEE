@@ -124,6 +124,7 @@ if __name__ == "__main__":
 	parser.add_argument('--pretrained', type=bool, default=config.pretrained, help='Pretrained ?')
 	parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
 	parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration Type.')
+	parser.add_argument('--batch_size_train, ', type=int, default=config.batch_size_train, help='Size of train batch.')
 
 	args = parser.parse_args()
 	main(args)
