@@ -81,7 +81,8 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 
 	transformations_train = transforms.Compose([
 		#transforms.Resize((args.input_dim, args.input_dim)),
-		transforms.Resize((224, 224)),
+		transforms.Resize((config.resize_img, config.resize_img)),
+		transforms.CenterCrop((config.dim, config.dim)),		
 		transforms.RandomChoice([
 			transforms.ColorJitter(brightness=(0.80, 1.20)),
 			transforms.RandomGrayscale(p = 0.25)]),
@@ -93,7 +94,8 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 		])
 
 	transformations_test = transforms.Compose([
-		transforms.Resize((224, 224)),
+		transforms.Resize((config.resize_img, config.resize_img)),
+		transforms.CenterCrop((config.dim, config.dim)),		
 		transforms.RandomApply([DistortionApplier(args.distortion_type, distortion_lvl)], p=1),
 		transforms.ToTensor(), 
 		transforms.Normalize(mean = mean, std = std),
