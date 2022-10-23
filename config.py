@@ -17,6 +17,7 @@ distortion_type = "pristine"
 exit_type = "bnpool"
 distribution = "predefined"
 pretrained = True
+seed = 42
 
 nr_class_dict = {"caltech256": 257}
 
