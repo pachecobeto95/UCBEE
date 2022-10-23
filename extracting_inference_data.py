@@ -82,7 +82,8 @@ def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_
 
 def main(args):
 
-	model_path =  os.path.join(config.DIR_NAME, "models", args.dataset_name, args.model_name, "ee_mobilenet_1_branches_id_2.pth")
+	model_path =  os.path.join(config.DIR_NAME, "models", args.dataset_name, args.model_name, 
+		"ee_mobilenet_%s_branches_id_%s.pth"%(args.n_branches, args.model_id) )
 
 
 	inference_data_path = os.path.join(config.DIR_NAME, "inference_data", args.dataset_name, args.model_name, 
