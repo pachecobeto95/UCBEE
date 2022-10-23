@@ -64,9 +64,8 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
 
     reward_actions[action].append(reward)
 
-    #avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
-    avg_reward_actions = np.mean(np.array(reward_actions), axis=0)
-    print(avg_reward_actions)
+    avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
+
     optimal_reward = max(0, delta_conf - overhead)
 
     inst_regret = optimal_reward - reward
