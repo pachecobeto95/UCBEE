@@ -122,6 +122,7 @@ if __name__ == "__main__":
 	parser.add_argument('--distribution', type=str, default=config.distribution, help='Distribution of early exits.')
 	parser.add_argument('--pretrained', type=bool, default=config.pretrained, help='Pretrained ?')
 	parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
+	parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration Type.')
 
 	args = parser.parse_args()
 	main(args)
