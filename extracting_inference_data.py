@@ -112,7 +112,7 @@ def main(args):
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser(description='UCB using MobileNet')
-	parser.add_argument('--model_id', type=int, default=args.model_id, help='Model Id.')
+	parser.add_argument('--model_id', type=int, default=config.model_id, help='Model Id.')
 	parser.add_argument('--distortion_type', type=str, default=config.distortion_type, help='Distortion Type.')
 	parser.add_argument('--n_branches', type=int, default=config.n_branches, help='Number of exit exits.')
 	parser.add_argument('--dataset_name', type=str, default=config.dataset_name, help='Dataset Name.')
