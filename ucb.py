@@ -63,7 +63,8 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
 
     reward_actions[action].append(reward)
 
-    avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
+    #avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
+    avg_reward_actions = np.mean(np.array(reward_actions), axis=0)
     optimal_reward = max(0, delta_conf - overhead)
 
     inst_regret = optimal_reward - reward
@@ -73,10 +74,10 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
     inst_regret_list[n_round] = round(inst_regret, 5)
     selected_arm_list[n_round] = round(threshold, 2) 
 
-    #if (n_round%report_period == 0):
+    if (n_round%report_period == 0):
     #print("N Round: %s, Overhead: %s"%(n_round, overhead), file=open(logPath, "a"))
-    print("Distortion Type: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(distortion_type, distortion_lvl, n_round, overhead), 
-      file=open(logPath, "a"))
+      print("Distortion Type: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(distortion_type, distortion_lvl, n_round, overhead), 
+        file=open(logPath, "a"))
 
   result = {"selected_arm": selected_arm_list, 
   "regret": inst_regret_list, 
