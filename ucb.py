@@ -27,7 +27,7 @@ def get_row_data(row, threshold):
     return conf_branch, conf_final, delta_conf
 
 
-def ucb(df, threshold_list, overhead, n_rounds, c, compute_reward, logPath, report_period=100):
+def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds, c, compute_reward, logPath, report_period=100):
 
   df = df.sample(frac=1)
   delta = 1e-10
