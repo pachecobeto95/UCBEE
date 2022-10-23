@@ -1,5 +1,5 @@
 from torchvision import datasets, transforms
-import torch, os, sys, requests, random, logging, torchvision, config
+import torch, os, sys, requests, random, logging, torchvision, config, cv2
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -16,8 +16,11 @@ class DistortionApplier(object):
 
 	def gaussian_blur(self, img, distortion_lvl):
 		image = np.array(img)
-		blurred_img = cv2.GaussianBlur(image, (4*distortion_lvl+1, 4*distortion_lvl+1), distortion_lvl, None, sigma, cv2.BORDER_CONSTANT)
-		return Image.fromarray(blurred_img) 
+		#blurred_img = cv2.GaussianBlur(image, (4*distortion_lvl+1, 4*distortion_lvl+1), distortion_lvl, None, sigma, cv2.BORDER_CONSTANT)
+		#return Image.fromarray(blurred_img) 
+		kernel_size = (4*sigma+1, 4*sigma+1)
+		blurrer = transforms.GaussianBlur(kernel_size=kernel_size, sigma=sigma)
+		return blurrer(img)
 
 	def gaussian_noise(self, img, distortion_lvl):
 		image = np.array(img)
