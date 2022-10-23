@@ -13,6 +13,9 @@ dim = 224
 model_name = "alexnet"
 n_branches = 1
 dataset_name = "caltech256"
+distortion_type = "pristine"
+exit_type = "bnpool"
+distribution = "predefined"
 
 nr_class_dict = {"caltech256": 257}
 
@@ -22,4 +25,3 @@ dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech25
 indices_path_dict = {"caltech256": os.path.join(DIR_NAME, "indices", "caltech256"),
 "cifar10": os.path.join(DIR_NAME,"indices", "cifar10") }
 
-distortion_type = "pristine"
