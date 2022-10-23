@@ -63,7 +63,7 @@ def save_result(result, save_path):
 	df_result.to_csv(save_path)
 
 
-def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, calib_type, distortion_type, device):
+def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, indices_path, calib_type, distortion_type, device):
 
 	for distortion_lvl in distortion_lvl_list:
 		print("Distortion Level: %s"%(distortion_lvl))
@@ -106,7 +106,8 @@ def main(args):
 	p_tar_list = [0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.]
 	distortion_lvl_list = config.distortion_lvl_dict[args.distortion_type]
 
-	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, args.calib_type, args.distortion_type, device)
+	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, indices_path, 
+		args.calib_type, args.distortion_type, device)
  
 
 if __name__ == "__main__":
