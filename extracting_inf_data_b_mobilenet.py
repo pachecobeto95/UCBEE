@@ -98,7 +98,7 @@ def main(args):
 	n_classes = config.nr_class_dict[args.dataset_name]
 
 	#Instantiate the Early-exit DNN model.
-	ee_model = utils.init_b_mobilenet()
+	ee_model = utils.init_b_mobilenet(model_path)
 
 	#Load the trained early-exit DNN model.
 	ee_model = ee_model.to(device)

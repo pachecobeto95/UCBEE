@@ -211,7 +211,7 @@ def load_model(model, modelPath, device):
 	model.load_state_dict(torch.load(modelPath, map_location=device)["model_state_dict"])	
 	return model.to(device)
 
-def init_b_mobilenet():
+def init_b_mobilenet(modelPath):
 	n_classes = 258
 	img_dim = 300
 	exit_type = None
@@ -223,7 +223,7 @@ def init_b_mobilenet():
 	print("Run")
 	b_mobilenet_pristine = b_mobilenet.B_MobileNet(n_classes, pretrained, n_branches, img_dim, exit_type, device)
 
-	pristine_model = load_model(b_mobilenet_pristine, config.EDGE_PRISTINE_MODEL_PATH, device)
+	pristine_model = load_model(b_mobilenet_pristine, modelPath, device)
 
 	sys.exit()
 	return [blur_model, noise_model, pristine_model], distorted_models_dict, distortion_classes
