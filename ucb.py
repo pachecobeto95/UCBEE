@@ -60,7 +60,6 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
     reward = compute_reward(conf_branch, delta_conf, threshold, overhead)
 
     n_actions[action] += 1
-    #print(len(n_actions), len(reward_actions))
 
     reward_actions[action].append(reward)
 
