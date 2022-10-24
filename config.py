@@ -20,6 +20,7 @@ distribution = "predefined"
 pretrained = True
 seed = 42
 batch_size_train = 64
+split_ratio = 0.1
 
 nr_class_dict = {"caltech256": 258}
 
