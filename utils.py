@@ -108,8 +108,8 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 	val_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 	test_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 
-	train_idx_path = os.path.join(save_indices_path, "training_idx_caltech256_%s.npy"%(args.model_id))
-	val_idx_path = os.path.join(save_indices_path, "validation_idx_caltech256_%s.npy"%(args.model_id))
+	train_idx_path = os.path.join(save_indices_path, "training_idx_caltech256_3_branches_%s.npy"%(args.model_id))
+	val_idx_path = os.path.join(save_indices_path, "validation_idx_caltech256_3_branches_%s.npy"%(args.model_id))
 	#test_idx_path = os.path.join(save_indices_path, "test_idx_caltech256.npy")
 
 	if( os.path.exists(train_idx_path) ):
@@ -218,9 +218,7 @@ def init_b_mobilenet(modelPath):
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	pretrained = False
 	n_branches = 3
-	distortion_classes = ["gaussian_blur", "gaussian_noise", "pristine"]
 
-	print("Run")
 	b_mobilenet_pristine = b_mobilenet.B_MobileNet(n_classes, pretrained, n_branches, img_dim, exit_type, device)
 
 	pristine_model = load_model(b_mobilenet_pristine, modelPath, device)
