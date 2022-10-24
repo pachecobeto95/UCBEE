@@ -262,9 +262,9 @@ class B_MobileNet(nn.Module):
       output_list.append(output_branch), infered_class_list.append(infered_class), conf_list.append(conf)
 
     x = self.stages[-1](x)
-    x = torch.flatten(x, 1)
+    x = x.mean(3).mean(2)
 
-    output = self.classifier(x)
+    output = self.fully_connected(x)
 
     conf, infered_class = torch.max(self.softmax(output), 1)
 
