@@ -3,7 +3,7 @@ import torch, os, sys, requests, random, logging, torchvision, config, cv2
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-
+import b_mobilenet
 
 class DistortionApplier(object):
 	def __init__(self, distortion_function, distortion_lvl):
@@ -207,6 +207,23 @@ def load_cifar10(args, dataset_path, indices_path, distortion_values):
 	return train_loader, val_loader, test_loader
 
 
+def load_model(model, modelPath, device):
+	model.load_state_dict(torch.load(modelPath, map_location=device)["model_state_dict"])	
+	return model.to(device)
 
+def init_b_mobilenet():
+	n_classes = 258
+	img_dim = 300
+	exit_type = None
+	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	pretrained = False
+	n_branches = 3
+	distortion_classes = ["gaussian_blur", "gaussian_noise", "pristine"]
 
+	print("Run")
+	b_mobilenet_pristine = b_mobilenet.B_MobileNet(n_classes, pretrained, n_branches, img_dim, exit_type, device)
 
+	pristine_model = load_model(b_mobilenet_pristine, config.EDGE_PRISTINE_MODEL_PATH, device)
+
+	sys.exit()
+	return [blur_model, noise_model, pristine_model], distorted_models_dict, distortion_classes
