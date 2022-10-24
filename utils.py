@@ -224,6 +224,5 @@ def init_b_mobilenet(modelPath):
 	b_mobilenet_pristine = b_mobilenet.B_MobileNet(n_classes, pretrained, n_branches, img_dim, exit_type, device)
 
 	pristine_model = load_model(b_mobilenet_pristine, modelPath, device)
-	print("Success")
-	sys.exit()
-	return [blur_model, noise_model, pristine_model], distorted_models_dict, distortion_classes
+
+	return b_mobilenet_pristine
