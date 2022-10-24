@@ -120,7 +120,7 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 
 	else:
 		# This line get the indices of the samples which belong to the training dataset and test dataset. 
-		train_idx, val_idx, test_idx = get_indices_caltech256(train_set, args.split_ratio)
+		train_idx, val_idx, test_idx = get_indices_caltech256(train_set, config.split_ratio)
 
 		#Save the training, validation and testing indices.
 		np.save(train_idx_path, train_idx), np.save(val_idx_path, val_idx)#, np.save(test_idx_path, test_idx)
@@ -129,7 +129,7 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 	val_data = torch.utils.data.Subset(val_set, indices=val_idx)
 	#test_data = torch.utils.data.Subset(test_set, indices=test_idx)
 
-	train_loader = torch.utils.data.DataLoader(train_data, batch_size=args.batch_size_train, shuffle=True, num_workers=4, pin_memory=True)
+	train_loader = torch.utils.data.DataLoader(train_data, batch_size=config.batch_size_train, shuffle=True, num_workers=4, pin_memory=True)
 	val_loader = torch.utils.data.DataLoader(val_data, batch_size=1, num_workers=4, pin_memory=True)
 	#test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, num_workers=4, pin_memory=True)
 
