@@ -21,7 +21,7 @@ pretrained = True
 seed = 42
 batch_size_train = 64
 
-nr_class_dict = {"caltech256": 256}
+nr_class_dict = {"caltech256": 258}
 
 dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech256", "256_ObjectCategories"),
 "cifar10": os.path.join(DIR_NAME,"datasets", "cifar10") }
