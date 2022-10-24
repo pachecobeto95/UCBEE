@@ -98,14 +98,14 @@ def main(args):
 	n_classes = config.nr_class_dict[args.dataset_name]
 
 	#Instantiate the Early-exit DNN model.
-	ee_model = b_mobilenet.B_MobileNet(n_classes, args.pretrained, config.n_branches, config.dim, args.exit_type, device)
+	ee_model = b_mobilenet.B_MobileNet(n_classes, args.pretrained, config.n_branches, config.dim, None, device)
 
 	#Load the trained early-exit DNN model.
 	ee_model = ee_model.to(device)
 	print(model_path)
 	ee_model.load_state_dict(torch.load(model_path, map_location=device)["model_state_dict"])
 	ee_model.eval()
-
+	sys.exit()
 	p_tar_list = [0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.]
 	distortion_lvl_list = config.distortion_lvl_dict[args.distortion_type]
 
