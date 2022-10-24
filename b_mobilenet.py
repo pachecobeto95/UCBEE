@@ -227,7 +227,7 @@ class B_MobileNet(nn.Module):
 
       else:
         output_list.append(output_branch), conf_list.append(conf.item()), class_list.append(infered_class)
-      
+
     return x, conf_list, None
 
   def forwardEmulation(self, x, p_tar_list):
@@ -248,3 +248,26 @@ class B_MobileNet(nn.Module):
 
   def forward(self, x, p_tar=0.5):
     return self.forwardEval(x, p_tar)
+
+  def forwardInferenceNoCalib(self, x):
+
+    output_list, conf_list, infered_class_list = [], [], []
+
+    for i, exitBlock in enumerate(self.exits):
+      x = self.stages[i](x)
+
+      output_branch = exitBlock(x)
+      conf, infered_class = torch.max(self.softmax(output_branch), 1)
+
+      output_list.append(output_branch), infered_class_list.append(infered_class), conf_list.append(conf)
+
+    x = self.stages[-1](x)
+    x = torch.flatten(x, 1)
+
+    output = self.classifier(x)
+
+    conf, infered_class = torch.max(self.softmax(output), 1)
+
+    output_list.append(output), infered_class_list.append(infered_class), conf_list.append(conf)
+
+    return output_list, conf_list, infered_class_list
