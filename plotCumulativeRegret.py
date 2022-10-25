@@ -19,7 +19,7 @@ df_random = pd.read_csv(random_filename)
 df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
 df_ucb_pristine = df_ucb[df_ucb.distortion_type == "pristine"]
-df_fixed_pristine = df_fixed[(df_fixed.distortion_type == "pristine")& ]
+df_fixed_pristine = df_fixed[df_fixed.distortion_type == "pristine"]
 df_random_pristine = df_random[df_random.distortion_type == "pristine"]
 
 history = np.arange(1, len(df_ucb_pristine.cumulative_regret.values) + 1)
