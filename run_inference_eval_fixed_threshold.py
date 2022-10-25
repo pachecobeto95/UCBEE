@@ -76,7 +76,7 @@ if (__name__ == "__main__"):
 	parser.add_argument('--dataset_name', type=str, default=config.dataset_name, help='Dataset Name.')
 	parser.add_argument('--model_name', type=str, default=config.model_name, help='Model name.')
 	parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
-	parser.add_argument('--calib_type', type=int, default="no_calib", help='Calibration type.')
+	parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration type.')
 
 
 	args = parser.parse_args()
