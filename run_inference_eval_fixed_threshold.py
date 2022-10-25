@@ -6,7 +6,7 @@ from ucb import save_results, get_row_data, reward_function_1
 
 
 
-def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath):
+def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath):
 
 	df = df.sample(frac=1)
 	nr_samples = len(df)
@@ -62,7 +62,7 @@ def ee_inference_fixed_threshold(args, df_inf_data, compute_reward, threshold_li
 
 				logging.debug("Distortion Level: %s, Threshold: %s, Overhead: %s"%(distortion_lvl, threshold, overhead))
 
-				results = run_ee_inference_fixed_threshold(df_temp, threshold, args.distortion_type, distortion_lvl, args.n_rounds, 
+				results = run_ee_inference_fixed_threshold(df_temp, threshold, overhead, args.distortion_type, distortion_lvl, args.n_rounds, 
 					compute_reward, logPath)
 
 
