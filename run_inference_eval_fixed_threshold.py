@@ -97,4 +97,4 @@ if (__name__ == "__main__"):
 	overhead_list = np.arange(0, 1.1, config.step_overhead)
 
 
-	ee_inference_fixed_threshold(args, df_inf_data, , threshold_list, overhead_list, distortion_values, savePath, logPath)
+	ee_inference_fixed_threshold(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
