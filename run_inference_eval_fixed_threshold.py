@@ -45,7 +45,7 @@ def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, d
 			print("Threshold: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(threshold, distortion_lvl, n_round, overhead), 
 				file=open(logPath, "a"))
 
-	result = {"threshold": threshold, "regret": inst_regret_list, "overhead":[round(overhead, 2)]*n_rounds,
+	result = {"threshold": [threshold]*n_rounds, "regret": inst_regret_list, "overhead":[round(overhead, 2)]*n_rounds,
 	"distortion_type": [distortion_type]*n_rounds, 
 	"distortion_lvl": [distortion_lvl]*n_rounds,
 	"cumulative_regret": cumulative_regret_list}
