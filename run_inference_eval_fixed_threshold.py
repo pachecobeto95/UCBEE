@@ -12,7 +12,7 @@ def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, d
 	nr_samples = len(df)
 	indices = np.arange(nr_samples)
 
-	reward_actions = []
+	reward_list = []
 	inst_regret_list = np.zeros(n_rounds)
 	cumulative_regret_list = np.zeros(n_rounds)
 	cumulative_regret = 0
