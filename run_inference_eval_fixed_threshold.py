@@ -2,8 +2,11 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import save_results, get_row_data, reward_function_1
+from ucb import get_row_data, reward_function_1
 
+def save_results(result, savePath):
+	df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
+	df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
 
 
 def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath, 
@@ -65,6 +68,8 @@ def ee_inference_fixed_threshold(args, df_inf_data, compute_reward, threshold_li
 
 				results = run_ee_inference_fixed_threshold(df_temp, threshold, overhead, args.distortion_type, distortion_lvl, args.n_rounds, 
 					compute_reward, logPath)
+
+				save_results(results, savePath)
 
 
 if (__name__ == "__main__"):
