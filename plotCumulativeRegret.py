@@ -22,7 +22,7 @@ df_ucb_pristine = df_ucb[df_ucb.distortion_type == "pristine"]
 df_fixed_pristine = df_fixed[df_fixed.distortion_type == "pristine"]
 df_random_pristine = df_random[df_random.distortion_type == "pristine"]
 
-history = np.arange(1, len(df_ucb_pristine.cumulative_regret.values) )
+history = np.arange(1, len(df_ucb_pristine.cumulative_regret.values) + 1)
 
 plt.plot(history, df_ucb_pristine.cumulative_regret.values)
 plt.plot(history, df_fixed_pristine.cumulative_regret.values)
