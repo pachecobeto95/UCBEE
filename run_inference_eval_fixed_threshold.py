@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import save_results
+from ucb import save_results, get_row_data
 
 
 
@@ -12,8 +12,7 @@ def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_
 	nr_samples = len(df)
 	indices = np.arange(nr_samples)
 
-
-	reward_actions = [[] for i in range(nr_arms)]
+	reward_actions = []
 	inst_regret_list = np.zeros(n_rounds)
 	cumulative_regret_list = np.zeros(n_rounds)
 	cumulative_regret = 0
@@ -27,9 +26,8 @@ def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_
 
 		reward = compute_reward(conf_branch, delta_conf, threshold, overhead)
 
-		n_actions[action] += 1
 
-		reward_actions[action].append(reward)
+		reward_list.append(reward)
 
 		optimal_reward = max(0, delta_conf - overhead)
 
