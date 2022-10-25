@@ -34,4 +34,14 @@ for overhead in overhead_list:
   #plt.plot(history, df_fixed_pristine.cumulative_regret.values, label="Pristine Fixed")
   plt.plot(history, df_random_pristine.cumulative_regret.values, label="Pristine Random")
   plt.legend(frameon=False, fontsize=fontsize)
+  ax.tick_params(axis='both', which='major', labelsize=fontsize)
+  plt.ylabel("Cumulative Regret", fontsize=fontsize)
+  plt.xlabel("Time Horizon", fontsize=fontsize)
   plt.savefig("cumulative_results_overhead_%s.pdf"%(overhead) )
+
+  
+  
+  
+  
+  
+  
