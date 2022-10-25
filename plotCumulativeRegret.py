@@ -41,7 +41,7 @@ for overhead in overhead_list:
   
   
   plt.legend(frameon=False, fontsize=fontsize)
-  ax.tick_params(axis='both', which='major', labelsdistortion_lvlize=fontsize)
+  ax.tick_params(axis='both', which='major', labelsize=fontsize)
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
   plt.savefig("cumulative_results2_overhead_%s.pdf"%(overhead) )
