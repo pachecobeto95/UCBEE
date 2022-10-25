@@ -6,7 +6,8 @@ from ucb import save_results, get_row_data, reward_function_1
 
 
 
-def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath):
+def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath, 
+	report_period=100):
 
 	df = df.sample(frac=1)
 	nr_samples = len(df)
