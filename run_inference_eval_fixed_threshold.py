@@ -18,7 +18,7 @@ def run_ee_inference_fixed_threshold(df, threshold, overhead, distortion_type, d
 	cumulative_regret_list = np.zeros(n_rounds)
 	cumulative_regret = 0
 
-	for n_round in range(n_rounds):
+	for n_round in tqdm(range(n_rounds)):
 		idx = random.choice(indices)
 		row = df.iloc[[idx]]
 
