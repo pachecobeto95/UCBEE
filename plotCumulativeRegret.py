@@ -48,7 +48,7 @@ for overhead in overhead_list:
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
   plt.tight_layout()
-  plt.savefig("cumulative_results_overhead_%s_final.pdf"%(round(overhead, 2)) )
+  plt.savefig("cumulative_results_overhead_%s_final.png"%(round(overhead, 2)) )
 
   
   
