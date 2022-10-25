@@ -12,6 +12,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 	nr_samples = len(df)
 	indices = np.arange(nr_samples)
 	nr_arms = len(threshold_list)
+	action_list = np.arange(nr_arms)
 
 	reward_actions = [[] for i in range(nr_arms)]
 	inst_regret_list = np.zeros(n_rounds)
@@ -22,7 +23,10 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 		idx = random.choice(indices)
 		row = df.iloc[[idx]]
 
-		threshold = random.choice(threshold_list)
+		#threshold = random.choice(threshold_list)
+		action = random.choice(action_list)
+		threshold = threshold_list[action]
+
 
 		conf_branch, conf_final, delta_conf = get_row_data(row, threshold)
 
