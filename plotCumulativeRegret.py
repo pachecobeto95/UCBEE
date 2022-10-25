@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os, sys
 
-saveDir = os.path.join(".", "ucb_results", )
+saveDir = os.path.join(".", "ucb_results", "caltech256", "mobilenet")
 
 ucb_filename = os.path.join(saveDir, "ucb_results_no_calib_mobilenet_1_branches_id_2.csv")
 fixed_filename = os.path.join(saveDir, "fixed_results_no_calib_mobilenet_1_branches_id_2.csv")
