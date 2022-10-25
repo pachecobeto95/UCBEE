@@ -99,6 +99,7 @@ if (__name__ == "__main__"):
 
 	threshold_list = [0.7, 0.75, 0.8, 0.85, 0.9]
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
+	overhead_list = np.arange(0, 1.1, config.step_overhead)
 
 
 	ee_inference_random_threshold(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
