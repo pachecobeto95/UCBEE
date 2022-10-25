@@ -28,3 +28,4 @@ plt.plot(history, df_ucb_pristine.cumulative_regret.values)
 plt.plot(history, df_fixed_pristine.cumulative_regret.values)
 plt.plot(history, df_random_pristine.cumulative_regret.values)
 
+plt.savefig("cumulative_results.pdf")
