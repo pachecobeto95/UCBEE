@@ -2,12 +2,17 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import save_results
+from ucb import save_results, get_row_data, reward_function_1
 
-def run_ee_inference_random_threshold(df, threshold_list, distortion_type, distortion_lvl, n_rounds, logPath):
+
+def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath,
+	report_period=100):
 
 	df = df.sample(frac=1)
+	nr_samples = len(df)
 	indices = np.arange(nr_samples)
+
+	reward_list = []
 
 
 	reward_actions = [[] for i in range(nr_arms)]
@@ -25,9 +30,10 @@ def run_ee_inference_random_threshold(df, threshold_list, distortion_type, disto
 
 		reward = compute_reward(conf_branch, delta_conf, threshold, overhead)
 
-		n_actions[action] += 1
+		#n_actions[action] += 1
 
-		reward_actions[action].append(reward)
+		#reward_actions[action].append(reward)
+		reward_list.append(reward)
 
 		optimal_reward = max(0, delta_conf - overhead)
 
