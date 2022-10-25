@@ -54,7 +54,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 	return result
 
 
-def ee_inference_random_threshold(args, df_inf_data, threshold_list, overhead_list, distortion_values, savePath, logPath):
+def ee_inference_random_threshold(args, df_inf_data, compute_reward, threshold_list, overhead_list, distortion_values, savePath, logPath):
 
 	df = df_inf_data[df_inf_data.distortion_type == args.distortion_type]
 
@@ -65,7 +65,11 @@ def ee_inference_random_threshold(args, df_inf_data, threshold_list, overhead_li
 
 			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 
-			results = run_ee_inference_random_threshold(df_temp, threshold_list, args.distortion_type, distortion_lvl, args.n_rounds, logPath)
+			results = run_ee_inference_random_threshold(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, 
+				args.n_rounds, compute_reward, logPath)
+
+
+
 
 
 if (__name__ == "__main__"):
@@ -97,4 +101,5 @@ if (__name__ == "__main__"):
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
 
 
-	ee_inference_random_threshold(args, df_inf_data, threshold_list, overhead_list, distortion_values, savePath, logPath)
+	ee_inference_random_threshold(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, logPath)
+
