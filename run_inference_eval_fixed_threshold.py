@@ -9,6 +9,7 @@ from ucb import save_results
 def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_lvl, n_rounds, logPath):
 
 	df = df.sample(frac=1)
+	nr_samples = len(df)
 	indices = np.arange(nr_samples)
 
 
