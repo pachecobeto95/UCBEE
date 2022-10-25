@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import os, sys, config
+import os, sys, config, argparse
+
+
+
 
 saveDir = os.path.join(".", "ucb_results", "caltech256", "mobilenet")
 fontsize = 16
@@ -44,7 +47,8 @@ for overhead in overhead_list:
   ax.tick_params(axis='both', which='major', labelsize=fontsize)
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
-  plt.savefig("cumulative_results2_overhead_%s.pdf"%(overhead) )
+  plt.tight_layout()
+  plt.savefig("cumulative_results_overhead_%s_final.pdf"%(round(overhead, 2)) )
 
   
   
