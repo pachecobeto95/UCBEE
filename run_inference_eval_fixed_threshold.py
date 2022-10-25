@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import save_results, get_row_data
+from ucb import save_results, get_row_data, reward_function_1
 
 
 
-def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_lvl, n_rounds, logPath):
+def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath):
 
 	df = df.sample(frac=1)
 	nr_samples = len(df)
@@ -50,7 +50,7 @@ def run_ee_inference_fixed_threshold(df, threshold, distortion_type, distortion_
 
 
 
-def ee_inference_fixed_threshold(args, df_inf_data, threshold_list, overhead_list, distortion_values, savePath, logPath):
+def ee_inference_fixed_threshold(args, df_inf_data, compute_reward, threshold_list, overhead_list, distortion_values, savePath, logPath):
 
 	df = df_inf_data[df_inf_data.distortion_type == args.distortion_type]
 
@@ -62,7 +62,8 @@ def ee_inference_fixed_threshold(args, df_inf_data, threshold_list, overhead_lis
 
 				logging.debug("Distortion Level: %s, Threshold: %s, Overhead: %s"%(distortion_lvl, threshold, overhead))
 
-				results = run_ee_inference_fixed_threshold(df_temp, threshold, args.distortion_type, distortion_lvl, args.n_rounds, logPath)
+				results = run_ee_inference_fixed_threshold(df_temp, threshold, args.distortion_type, distortion_lvl, args.n_rounds, 
+					compute_reward, logPath)
 
 
 if (__name__ == "__main__"):
@@ -96,4 +97,4 @@ if (__name__ == "__main__"):
 	overhead_list = np.arange(0, 1.1, config.step_overhead)
 
 
-	ee_inference_fixed_threshold(args, df_inf_data, threshold_list, overhead_list, distortion_values, savePath, logPath)
+	ee_inference_fixed_threshold(args, df_inf_data, , threshold_list, overhead_list, distortion_values, savePath, logPath)
