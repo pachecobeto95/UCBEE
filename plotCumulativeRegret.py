@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import os, sys
+import os, sys, config
 
 saveDir = os.path.join(".", "ucb_results", "caltech256", "mobilenet")
 
@@ -18,14 +18,18 @@ df_fixed = df_fixed.loc[:, ~df_fixed.columns.str.contains('^Unnamed')]
 df_random = pd.read_csv(random_filename)
 df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
-df_ucb_pristine = df_ucb[df_ucb.distortion_type == "pristine"]
-df_fixed_pristine = df_fixed[df_fixed.distortion_type == "pristine"]
-df_random_pristine = df_random[df_random.distortion_type == "pristine"]
+overhead_list = np.arange(0, 1.1, config.step_overhead)
 
-history = np.arange(1, len(df_ucb_pristine.cumulative_regret.values) + 1)
+for overhead in overhead_list:
 
-plt.plot(history, df_ucb_pristine.cumulative_regret.values)
-#plt.plot(history, df_fixed_pristine.cumulative_regret.values)
-plt.plot(history, df_random_pristine.cumulative_regret.values)
+  df_ucb_pristine = df_ucb[(df_ucb.distortion_type == "pristine") & (df_ucb.overhead == overhead)]
+  df_fixed_pristine = df_fixed[(df_fixed.distortion_type == "pristine") & (df_fixed.overhead == overhead)]
+  df_random_pristine = df_random[(df_random.distortion_type == "pristine") & (df_random.overhead == overhead)]
 
-plt.savefig("cumulative_results.pdf")
+  history = np.arange(1, len(df_ucb_pristine.cumulative_regret.values) + 1)
+
+  plt.plot(history, df_ucb_pristine.cumulative_regret.values)
+  #plt.plot(history, df_fixed_pristine.cumulative_regret.values)
+  plt.plot(history, df_random_pristine.cumulative_regret.values)
+
+  plt.savefig("cumulative_results_overhead_%s.pdf"%(overhead) )
