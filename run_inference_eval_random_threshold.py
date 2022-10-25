@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
+from ucb import save_results
 
 def run_ee_inference_random_threshold(df, threshold_list, distortion_type, distortion_lvl, n_rounds, logPath):
 
@@ -79,9 +80,9 @@ if (__name__ == "__main__"):
 		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "ucb_results", args.dataset_name, args.model_name, 
-		"fixed_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"random_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
-	logPath = os.path.join(config.DIR_NAME, "log_%s_id_%s.txt"%(args.threshold_mode, args.model_id))
+	logPath = os.path.join(config.DIR_NAME, "log_id_%s.txt"%(args.model_id))
 
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
