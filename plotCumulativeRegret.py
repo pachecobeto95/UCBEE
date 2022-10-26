@@ -24,32 +24,43 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   history = np.arange(1, nr_samples + 1)
 
+  color_random = ["lightcoral", "indianred", "darkred"]
+  color_fixed = ["lime", "limegreen", "darkgreen"]
+  color_ucb = ["aquamarine", "steelblue", "royalblue"]
+
+  linestyle_list = ["solid", "dashed", "dotted"]
+
   fig, ax = plt.subplots()
 
 
-  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
+  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine", color=color_random[0], 
+    linestyle=linestyle_list[0])
 
 
-  for distortion_lvl in distortion_list:
+  for i, distortion_lvl in enumerate(distortion_list, 1):
     df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl))
+    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl),
+      color=color_random[i], linestyle=linestyle_list[i])
 
 
   df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
-  plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold))
+  plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold), color=color_fixed[0],
+    linestyle=linestyle_list[0])
 
 
-  for distortion_lvl in distortion_list:
+  for i, distortion_lvl in enumerate(distortion_list, 1):
     df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
-    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl))
+    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl),
+      color=color_fixed[i], linestyle=linestyle_list[i])
 
 
-  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine")
+  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine", color=color_ucb[0])
 
 
-  for distortion_lvl in distortion_list:
+  for i, distortion_lvl in enumerate(distortion_list, 1):
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"UCB Blur $\sigma=%s$"%(distortion_lvl))
+    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"UCB Blur $\sigma=%s$"%(distortion_lvl),
+      color=color_ucb[i], linestyle=linestyle_list[i])
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
@@ -59,7 +70,6 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   plt.tight_layout()
   plt.savefig(savePath + ".pdf")
   #plt.savefig(savePath + ".jpg")
-
 
 def main(args):
   saveDataDir = os.path.join(config.DIR_NAME, "ucb_results", "caltech256", "mobilenet")
