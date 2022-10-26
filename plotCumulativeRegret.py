@@ -20,7 +20,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   df_random_pristine, df_random_blur = extractedData(df_random)
 
   nr_samples = len(df_ucb_pristine.cumulative_regret.values)
-  threshold_list = [0.7, 0.8]
+  threshold_list = [0.8]
 
   history = np.arange(1, nr_samples + 1)
 
@@ -46,7 +46,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
       plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"Fixed w/$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl))
 
 
-  plt.legend(frameon=False, fontsize=fontsize)
+  plt.legend(frameon=False, fontsize=fontsize-4)
   ax.tick_params(axis='both', which='major', labelsize=fontsize)
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
