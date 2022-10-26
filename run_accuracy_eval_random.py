@@ -56,14 +56,11 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 	acc = sum(correct_list)/n_rounds
 	acc_results = {"acc": acc, "overhead": overhead, "distortion_type": distortion_type, "distortion_lvl": distortion_lvl}
 
-	result = {"selected_arm": selected_arm_list, 
-	"regret": inst_regret_list, 
+	result = {"regret": inst_regret_list, 
 	"overhead":[round(overhead, 2)]*n_rounds,
 	"distortion_type": [distortion_type]*n_rounds, 
 	"distortion_lvl": [distortion_lvl]*n_rounds,
-	"cumulative_regret": cumulative_regret_list, 
-	"c": [c]*n_rounds, "acc_by_epoch": acc_list}
-
+	"cumulative_regret": cumulative_regret_list,"acc_by_epoch": acc_list}
 	
 	return result, acc_results
 
