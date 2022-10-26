@@ -20,30 +20,36 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   df_random_pristine, df_random_blur = extractedData(df_random)
 
   nr_samples = len(df_ucb_pristine.cumulative_regret.values)
-  threshold_list = [0.8]
+  threshold = 0.8
 
   history = np.arange(1, nr_samples + 1)
 
   fig, ax = plt.subplots()
 
-  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
-  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine")
-  for threshold in threshold_list:
-    df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
-    plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold))
-   
-  for distortion_lvl in distortion_list:
-    df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
 
-    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"UCB Blur $\sigma=%s$"%(distortion_lvl))
+  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
+
+
+  for distortion_lvl in distortion_list:
+    df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
     plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl))
 
-  
-  for threshold in threshold_list:
-    for distortion_lvl in distortion_list:
-      df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
-      plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl))
+
+  df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
+  plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold))
+
+
+  for distortion_lvl in distortion_list:
+    df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
+    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl))
+
+
+  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine")
+
+
+  for distortion_lvl in distortion_list:
+    df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
+    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"UCB Blur $\sigma=%s$"%(distortion_lvl))
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
