@@ -80,7 +80,7 @@ def ee_inference_fixed_threshold(args, df_inf_data, compute_reward, threshold_li
 					args.n_rounds, compute_reward, logPath)
 
 				save_results(results, savePath)
-				save_results(acc_results, saveUCBAccPath)
+				save_acc_results(acc_results, saveUCBAccPath)
 
 if (__name__ == "__main__"):
 

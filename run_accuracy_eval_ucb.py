@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import ucb, reward_function_1, save_results
+from ucb import ucb, reward_function_1, save_results, save_acc_results
 
 
 
@@ -22,7 +22,7 @@ def run_ucb_inference_eval(args, df_inf_data, compute_reward, threshold_list, ov
 			
 			save_results(results, savePath)
 
-			save_results(acc_results, saveAccPath)
+			save_acc_results(acc_results, saveAccPath)
 
 
 if (__name__ == "__main__"):
