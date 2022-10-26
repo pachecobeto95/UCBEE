@@ -20,6 +20,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   df_random_pristine, df_random_blur = extractedData(df_random)
 
   nr_samples = len(df_ucb_pristine.cumulative_regret.values)
+  threshold_list = df_fixed_pristine.threshold.unique()
 
   history = np.arange(1, nr_samples + 1)
 
