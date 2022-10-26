@@ -91,7 +91,7 @@ if (__name__ == "__main__"):
 		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "ucb_results", args.dataset_name, args.model_name, 
-		"fixed_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"%s_fixed_results_%s_%s_%s_branches_id_%s.csv"%(args.distortion_type, args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	logPath = os.path.join(config.DIR_NAME, "log_fixed_id_%s.txt"%(args.model_id))
 
