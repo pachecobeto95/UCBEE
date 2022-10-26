@@ -7,7 +7,7 @@ from ucb import ucb, reward_function_1, save_results, save_acc_results
 
 
 def run_ucb_inference_eval(args, df_inf_data, compute_reward, threshold_list, overhead_list, distortion_values, savePath, saveAccPath, 
-	logPath)
+	logPath):
 	
 	df = df_inf_data[df_inf_data.distortion_type == args.distortion_type]
 
