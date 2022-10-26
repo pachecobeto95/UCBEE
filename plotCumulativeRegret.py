@@ -88,7 +88,7 @@ def main(args):
     df_random_overhead = df_random[df_random.overhead == overhead]
 
     cumulativeRegretPlot(df_ucb_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead, 
-      df_random_overhead, overhead, distortion_list, fontsize, savePath)
+      df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
 if (__name__ == "__main__"):
