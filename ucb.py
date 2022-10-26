@@ -133,6 +133,6 @@ def save_results(result, savePath):
 
 
 def save_acc_results(results, savePath):
-  df = pd.DataFrame(results)
+  df = pd.DataFrame(results, index=[0])
   df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
 
