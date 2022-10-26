@@ -74,7 +74,7 @@ def ee_inference_fixed_threshold(args, df_inf_data, compute_reward, threshold_li
 
 if (__name__ == "__main__"):
 
-	parser = argparse.ArgumentParser(description='UCB on Early-exit Deep Neural Networks.')
+	parser = argparse.ArgumentParser(description='Fixed on Early-exit Deep Neural Networks.')
 	parser.add_argument('--model_id', type=int, default=config.model_id, help='Model Id.')
 	parser.add_argument('--n_rounds', type=int, default=config.n_rounds, help='Number of rounds (default: %s)'%(config.n_rounds))
 	parser.add_argument('--distortion_type', type=str, default=config.distortion_type, help='Distortion Type.')
