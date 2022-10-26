@@ -2,7 +2,14 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import get_row_data, reward_function_1
+from ucb import reward_function_1
+
+def get_row_data(row, threshold):
+
+	conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
+	delta_conf = conf_final - conf_branch
+	return conf_branch, conf_final, delta_conf
+
 
 def save_results(result, savePath):
 	df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
@@ -30,7 +37,6 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 		#threshold = random.choice(threshold_list)
 		action = random.choice(action_list)
 		threshold = threshold_list[action]
-		print(threshold)
 
 		conf_branch, conf_final, delta_conf = get_row_data(row, threshold)
 
