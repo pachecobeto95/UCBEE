@@ -129,3 +129,10 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
 def save_results(result, savePath):
   df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
   df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
+
+
+
+def save_acc_results(results, savePath):
+  df = pd.DataFrame(results)
+  df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
+
