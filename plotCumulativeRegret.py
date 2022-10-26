@@ -30,7 +30,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine")
   for threshold in threshold_list:
     df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
-    plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label="Fixed w/$\alpha=%s$ Pristine"%(threshold))
+    plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"Fixed w/$\alpha=%s$ Pristine"%(threshold))
    
   for distortion_lvl in distortion_list:
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
