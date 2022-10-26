@@ -2,8 +2,14 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import get_row_data, reward_function_1, save_results, check_correct, save_acc_results
+from ucb import reward_function_1, save_results, check_correct, save_acc_results
 
+def get_row_data(row, threshold):
+
+	conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
+	delta_conf = conf_final - conf_branch
+
+	return conf_branch, conf_final, delta_conf
 
 
 def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath,
@@ -75,13 +81,13 @@ def run_random_inference_eval(args, df_inf_data, compute_reward, threshold_list,
 
 		for overhead in overhead_list:
 
-			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
-
+			#logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+			print("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 			results, acc_results = run_ee_inference_random_threshold(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, 
 				args.n_rounds, compute_reward, logPath)
 
 			save_results(results, savePath)
-			
+
 			save_acc_results(acc_results, saveUCBAccPath)
 
 
