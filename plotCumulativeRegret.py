@@ -20,7 +20,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   df_random_pristine, df_random_blur = extractedData(df_random)
 
   nr_samples = len(df_ucb_pristine.cumulative_regret.values)
-  threshold_list = df_fixed_pristine.threshold.unique()
+  threshold_list = [0.7, 0.8]
 
   history = np.arange(1, nr_samples + 1)
 
@@ -77,7 +77,8 @@ def main(args):
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
   overhead_list = np.arange(0, 1.1, config.step_overhead)
-  distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
+  #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
+  distortion_list = [1, 3]
 
   for overhead in overhead_list:
 
