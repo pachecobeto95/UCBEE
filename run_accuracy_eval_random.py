@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import get_row_data, reward_function_1, save_results, check_correct
+from ucb import get_row_data, reward_function_1, save_results, check_correct, save_acc_results
+
 
 
 def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds, compute_reward, logPath,
@@ -80,8 +81,8 @@ def run_random_inference_eval(args, df_inf_data, compute_reward, threshold_list,
 				args.n_rounds, compute_reward, logPath)
 
 			save_results(results, savePath)
-
-			save_results(acc_results, saveUCBAccPath)
+			
+			save_acc_results(acc_results, saveUCBAccPath)
 
 
 if (__name__ == "__main__"):
