@@ -12,12 +12,10 @@ def extractedData(df):
 
   return df_pristine, df_blur
 
-def cumulativeRegretPlot(df_ucb, df_fixed, df_random, overhead, distortion_list, fontsize, savePath):
+def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, overhead, distortion_list, fontsize, savePath):
 
 
   df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
-
-  df_fixed_pristine, df_fixed_blur = extractedData(df_fixed)
 
   df_random_pristine, df_random_blur = extractedData(df_random)
 
@@ -59,14 +57,18 @@ def main(args):
   savePlotDir = os.path.join(config.DIR_NAME, "plots")
 
   ucb_filename = os.path.join(saveDataDir, "ucb_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
-  fixed_filename = os.path.join(saveDataDir, "fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
+  pristine_fixed_filename = os.path.join(saveDataDir, "pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
+  blur_fixed_filename = os.path.join(saveDataDir, "gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   random_filename = os.path.join(saveDataDir, "random_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id) )
 
   df_ucb = pd.read_csv(ucb_filename)
   df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
 
-  df_fixed = pd.read_csv(fixed_filename)
-  df_fixed = df_fixed.loc[:, ~df_fixed.columns.str.contains('^Unnamed')] 
+  df_fixed_pristine = pd.read_csv(pristine_fixed_filename)
+  df_fixed_pristine = df_fixed_pristine.loc[:, ~df_fixed_pristine.columns.str.contains('^Unnamed')] 
+
+  df_fixed_blur = pd.read_csv(blur_fixed_filename)
+  df_fixed_blur = df_fixed_blur.loc[:, ~df_fixed_blur.columns.str.contains('^Unnamed')] 
 
   df_random = pd.read_csv(random_filename)
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
@@ -80,11 +82,13 @@ def main(args):
 
     fig, ax = plt.subplots()
 
-    df_ucb = df_ucb[df_ucb.overhead == overhead]
-    df_fixed = df_fixed[df_fixed.overhead == overhead]
-    df_random = df_random[df_random.overhead == overhead]  
+    df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
+    df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
+    df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
+    df_random_overhead = df_random[df_random.overhead == overhead]
 
-    cumulativeRegretPlot(df_ucb, df_fixed, df_random, overhead, distortion_list, fontsize, savePath)
+    cumulativeRegretPlot(df_ucb_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead, 
+      df_random_overhead, overhead, distortion_list, fontsize, savePath)
 
 
 if (__name__ == "__main__"):
