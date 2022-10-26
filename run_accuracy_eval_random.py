@@ -122,7 +122,7 @@ if (__name__ == "__main__"):
 	threshold_list = np.arange(0, 1.1, config.step_arms)
 
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
-	overhead_list = np.arange(0, 1.1, config.step_overhead)
+	overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 
 
 	run_random_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
