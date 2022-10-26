@@ -61,7 +61,7 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
   cumulative_regret = 0
   correct_list, acc_list = [], []
   
-  for n_round in range(n_rounds):
+  for n_round in tqdm(range(n_rounds)):
     idx = random.choice(indices)
     row = df.iloc[[idx]]
 
