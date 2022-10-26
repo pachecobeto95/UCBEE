@@ -24,6 +24,8 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   history = np.arange(1, nr_samples + 1)
 
+  fig, ax = plt.subplots()
+
   plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="UCB Pristine")
   for threshold in threshold_list:
@@ -80,8 +82,6 @@ def main(args):
   for overhead in overhead_list:
 
     savePath = os.path.join(savePlotDir, "cumulative_results_overhead_%s_test"%(round(overhead, 2)) )
-
-    fig, ax = plt.subplots()
 
     df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
     df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
