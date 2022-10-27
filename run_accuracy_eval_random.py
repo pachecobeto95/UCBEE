@@ -30,7 +30,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 	for n_round in tqdm(range(n_rounds)):
 		idx = random.choice(indices)
 		row = df.iloc[[idx]]
-compute_reward
+
 		action = random.choice(action_list)
 		threshold = threshold_list[action]
 
@@ -47,7 +47,7 @@ compute_reward
 		acc_list.append(acc_by_epoch)
 
 		reward_actions[action].append(reward)
-compute_reward
+
 		optimal_reward = max(0, delta_conf - overhead)
 
 		inst_regret = optimal_reward - reward
