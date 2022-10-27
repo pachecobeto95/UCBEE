@@ -86,7 +86,7 @@ def main(args):
   df_random = pd.read_csv(random_filename)
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
-  overhead_list = np.arange(0, 1.1, config.step_overhead)
+  overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
   distortion_list = [1, 3]
 
