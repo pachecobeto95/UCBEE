@@ -60,7 +60,8 @@ if (__name__ == "__main__"):
 	overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 
 
-	distortion_values = [1, 2, 3, 4]
+	#distortion_values = [1, 2, 3, 4]
+	distortion_values = config.distortion_lvl_dict[args.distortion_type]
 
 
 	run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
