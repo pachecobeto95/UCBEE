@@ -63,7 +63,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 	acc = sum(correct_list)/n_rounds
 	acc_results = {"acc": acc, "overhead": overhead, "distortion_type": distortion_type, "distortion_lvl": distortion_lvl}
-	print("Acc: %s"%())
+	print("Acc: %s"%(acc))
 	sys.exit()
 	result = {"regret": inst_regret_list, 
 	"overhead":[round(overhead, 2)]*n_rounds,
