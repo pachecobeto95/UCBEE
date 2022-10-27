@@ -1,4 +1,4 @@
-compute_rewardimport numpy as np
+import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
