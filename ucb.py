@@ -10,15 +10,10 @@ def reward_function_1(conf_branch, delta_conf, arm, overhead):
 
 def get_row_data(row, threshold):
   conf_branch = row.conf_branch_1.item()
-  conf_final = row.conf_branch_2.item()	delta_conf = conf_final - conf_branch
+  conf_final = row.conf_branch_2.item()	
+  delta_conf = conf_final - conf_branch
 
-	return conf_branch, conf_final, delta_conf
-
-
-	delta_conf = conf_final - conf_branch
-
-	return conf_branch, conf_final, delta_conf
-
+  return conf_branch, conf_final, delta_conf
 
 #def get_row_data(row, threshold):
 
@@ -61,7 +56,13 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
   nr_arms, nr_samples = len(threshold_list), len(df)
   indices = np.arange(nr_samples)
 
-  avg_reward_actions, n_actions = np.zeros(nr_arms), np.zeros(nr_arms)
+  avg	delta_conf = conf_final - conf_branch
+
+	return conf_branch, conf_final, delta_conf
+	delta_conf = conf_final - conf_branch
+
+	return conf_branch, conf_final, delta_conf
+_reward_actions, n_actions = np.zeros(nr_arms), np.zeros(nr_arms)
   reward_actions = [[] for i in range(nr_arms)]
   inst_regret_list, selected_arm_list = np.zeros(n_rounds), np.zeros(n_rounds)
   cumulative_regret_list = np.zeros(n_rounds)
