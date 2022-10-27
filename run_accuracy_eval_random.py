@@ -33,7 +33,6 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 		action = random.choice(action_list)
 		threshold = threshold_list[action]
-		print(threshold)
 
 
 		conf_branch, conf_final, delta_conf = get_row_data(row, threshold)
@@ -42,6 +41,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 		correct = compute_correct(row, threshold)
 		correct_list.append(correct)
+		print(threshold, correct)
 
 		acc_by_epoch = sum(correct_list)/len(correct_list)
 
