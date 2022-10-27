@@ -59,9 +59,6 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
   avg	delta_conf = conf_final - conf_branch
 
 	return conf_branch, conf_final, delta_conf
-	delta_conf = conf_final - conf_branch
-
-	return conf_branch, conf_final, delta_conf
 _reward_actions, n_actions = np.zeros(nr_arms), np.zeros(nr_arms)
   reward_actions = [[] for i in range(nr_arms)]
   inst_regret_list, selected_arm_list = np.zeros(n_rounds), np.zeros(n_rounds)
