@@ -89,7 +89,7 @@ def main(args):
 
   overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
-  distortion_list = [1, 2, 3, 4]
+  distortion_list = [1, 2, 4]
 
   for overhead in overhead_list:
 
