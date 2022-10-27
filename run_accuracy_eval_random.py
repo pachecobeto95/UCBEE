@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import reward_function_1, save_results, check_correct, save_acc_results
+from ucb import reward_function_1, save_results, compute_correct, save_acc_results
 
 def get_row_data(row, threshold):
 
@@ -39,7 +39,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 		reward = compute_reward(conf_branch, delta_conf, threshold, overhead)
 
-		correct = check_correct(row, threshold)
+		correct = compute_correct(row, threshold)
 		correct_list.append(correct)
 
 		acc_by_epoch = sum(correct_list)/len(correct_list)
