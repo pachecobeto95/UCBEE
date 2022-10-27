@@ -73,7 +73,7 @@ def main(args):
   ucb_filename = os.path.join(saveDataDir, "ucb_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   pristine_fixed_filename = os.path.join(saveDataDir, "pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   blur_fixed_filename = os.path.join(saveDataDir, "gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
-  random_filename = os.path.join(saveDataDir, "new_random_results_no_calib_mobilenet_1_branches_id_%s_final.csv"%(args.model_id) )
+  random_filename = os.path.join(saveDataDir, "random_results_no_calib_mobilenet_1_branches_id_%s_final.csv"%(args.model_id) )
 
   df_ucb = pd.read_csv(ucb_filename)
   df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
@@ -89,7 +89,7 @@ def main(args):
 
   overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
-  distortion_list = [1, 3]
+  distortion_list = [1, 2, 3, 4]
 
   for overhead in overhead_list:
 
