@@ -41,7 +41,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 		correct = compute_correct(row, threshold)
 		correct_list.append(correct)
-		print(threshold, correct)
+		#print(threshold, correct)
 
 		acc_by_epoch = sum(correct_list)/len(correct_list)
 
