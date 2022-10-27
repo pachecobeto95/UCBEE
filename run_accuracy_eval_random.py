@@ -119,6 +119,10 @@ if (__name__ == "__main__"):
 
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
+	print(sum(df_inf_data.correct_branch_1.values)/len(df_inf_data.correct_branch_1.values))
+	print(sum(df_inf_data.correct_branch_2.values)/len(df_inf_data.correct_branch_2.values))
+
+	sys.exit()
 
 	threshold_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 
