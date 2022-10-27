@@ -5,28 +5,28 @@ import os, sys, random, argparse, itertools, logging
 
 
 def reward_function_1(conf_branch, delta_conf, arm, overhead):  
-  return delta_conf - overhead if (conf_branch < arm) else 0 
+  return max(delta_conf, 0) - overhead if (conf_branch < arm) else 0 
 
-
-def get_row_data(row, threshold):
-  conf_branch = row.conf_branch_1.item()
-  conf_final = row.conf_branch_2.item()	
-  delta_conf = conf_final - conf_branch
-
-  return conf_branch, conf_final, delta_conf
 
 #def get_row_data(row, threshold):
+#  conf_branch = row.conf_branch_1.item()
+#  conf_final = row.conf_branch_2.item()	
+#  delta_conf = conf_final - conf_branch
 
-#  conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
+#  return conf_branch, conf_final, delta_conf
 
-#  if(conf_final >= threshold):
-#    delta_conf = conf_final - conf_branch
-#    return conf_branch, conf_final, delta_conf
+def get_row_data(row, threshold):
 
-#  else:
-#    conf_list = [conf_branch, conf_final]
-#    delta_conf = max(conf_list) - conf_branch 
-#    return conf_branch, conf_final, delta_conf
+  conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
+
+  if(conf_final >= threshold):
+    delta_conf = conf_final - conf_branch
+    return conf_branch, conf_final, delta_conf
+
+  else:
+    conf_list = [conf_branch, conf_final]
+    delta_conf = max(conf_list) - conf_branch 
+    return conf_branch, conf_final, delta_conf
 
 def compute_correct(row, threshold):
   conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
