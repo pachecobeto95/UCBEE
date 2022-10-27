@@ -33,6 +33,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 		action = random.choice(action_list)
 		threshold = threshold_list[action]
+		print(threshold)
 
 
 		conf_branch, conf_final, delta_conf = get_row_data(row, threshold)
