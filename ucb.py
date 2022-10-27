@@ -28,6 +28,17 @@ def get_row_data(row, threshold):
 #    delta_conf = max(conf_list) - conf_branch 
 #    return conf_branch, conf_final, delta_conf
 
+def compute_correct(row, threshold):
+  conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
+
+  if(conf_branch >= threshold):
+    correct = row.correct_branch_1.item()
+
+  else:
+      correct = row.correct_branch_2.item()
+
+  return correct
+
 
 def check_correct(row, threshold):
   conf_branch, conf_final = row.conf_branch_1.item(), row.conf_branch_2.item()
