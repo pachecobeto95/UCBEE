@@ -11,8 +11,7 @@ def get_row_data(row, threshold):
 
 	return conf_branch, conf_final, delta_conf
 
-def run_ee_inference_fixed_threshold(df, threshold, overhead, args.distortion_type, distortion_lvl, n_rounds, compute_reward, logPath, 
-	report_period=100):
+def run_ee_inference_fixed_threshold(df, threshold, overhead, args.distortion_type, distortion_lvl, n_rounds, compute_reward, logPath, report_period=100):
 
 	df = df.sample(frac=1)
 	nr_samples = len(df)
