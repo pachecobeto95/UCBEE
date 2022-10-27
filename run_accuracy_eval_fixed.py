@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import reward_function_1, check_correct, save_results
+from ucb import reward_function_1, check_correct, save_results, save_acc_results
 
 def get_row_data(row, threshold):
 
