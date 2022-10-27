@@ -81,8 +81,8 @@ def run_random_inference_eval(args, df_inf_data, compute_reward, threshold_list,
 
 		for overhead in overhead_list:
 
-			#logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
-			print("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+			#print("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 			results, acc_results = run_ee_inference_random_threshold(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, 
 				args.n_rounds, compute_reward, logPath)
 
