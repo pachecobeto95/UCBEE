@@ -61,6 +61,11 @@ if (__name__ == "__main__"):
 	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()
 
 
+	print(sum(df_inf_data.correct_branch_1.values)/len(df_inf_data.correct_branch_1.values), sum(df_inf_data.correct_branch_2.values)/len(df_inf_data.correct_branch_2.values))
+
+	sys.exit()
+
+
 	run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)
 
