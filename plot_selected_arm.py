@@ -5,11 +5,7 @@ import os, sys, config, argparse
 import statistics
 from statistics import mode
  
-def most_common(List):
-    return(mode(List))
-   
-List = [2, 1, 2, 2, 1, 3]
-print(most_common(List))
+
 def extractedData(df):
 
   df_pristine = df[df.distortion_type == "pristine"] 
@@ -65,7 +61,7 @@ def main(args):
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
   distortion_list = [1, 3]
 
-  savePath = os.path.join(savePlotDir, "selected_arm_id_%s"%(round(overhead, 2)) )
+  savePath = os.path.join(savePlotDir, "selected_best_arm")
 
   selected_armPlot(df_ucb, overhead_list, distortion_list, args.fontsize, savePath)
 
