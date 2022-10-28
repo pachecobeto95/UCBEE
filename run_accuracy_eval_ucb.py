@@ -44,10 +44,10 @@ if (__name__ == "__main__"):
 		"%s_inference_data_%s_%s_branches_id_%s_final.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "new_ucb_results_final", args.dataset_name, args.model_name, 
-		"new_ucb_results_%s_%s_%s_branches_id_%s_alt.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"new_ucb_results_%s_%s_%s_branches_id_%s_alt2.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results_final", args.dataset_name, args.model_name, 
-		"acc_ucb_%s_%s_%s_branches_id_%s_alt.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"acc_ucb_%s_%s_%s_branches_id_%s_alt2.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	logPath = os.path.join(config.DIR_NAME, "logAccUCB_id_%s.txt"%(args.model_id))
 
