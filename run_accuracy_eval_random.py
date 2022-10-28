@@ -89,7 +89,7 @@ def run_random_inference_eval(args, df_inf_data, compute_reward, threshold_list,
 
 			save_results(results, savePath)
 
-			save_acc_results(acc_results, saveUCBAccPath)
+			#save_acc_results(acc_results, saveUCBAccPath)
 
 
 if (__name__ == "__main__"):
