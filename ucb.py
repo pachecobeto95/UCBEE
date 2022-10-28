@@ -5,7 +5,7 @@ import os, sys, random, argparse, itertools, logging
 
 
 def reward_function_1(conf_branch, delta_conf, arm, overhead):  
-  return max(delta_conf, 0) - overhead if (conf_branch < arm) else 0 
+  return max(delta_conf, 0) - overhead if (conf_branch < arm) else conf_branch 
 
 def reward_function_2(conf_branch, delta_conf, arm, overhead):  
   return delta_conf - overhead if (conf_branch < arm) else 0 
@@ -106,7 +106,7 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
 
     avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
 
-    optimal_reward = max(0, delta_conf - overhead)
+    optimal_reward = max(conf_branch, delta_conf - overhead)
 
     inst_regret = optimal_reward - reward
     cumulative_regret += inst_regret
@@ -120,7 +120,7 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
       print("Distortion Type: %s, Distortion Level: %s, N Round: %s, Overhead: %s"%(distortion_type, distortion_lvl, n_round, overhead), 
         file=open(logPath, "a"))
 
-  acc = sum(correct_list)/n_rounds
+  acc = sum(correct_list)/len(correct_list)
   acc_results = {"acc": acc, "overhead": overhead, "distortion_type": distortion_type, "distortion_lvl": distortion_lvl}
 
   result = {"selected_arm": selected_arm_list, 
