@@ -41,7 +41,7 @@ if (__name__ == "__main__"):
 	args = parser.parse_args()
 
 	inference_data_path = os.path.join(config.DIR_NAME, "inference_data", args.dataset_name, args.model_name, 
-		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
+		"%s_inference_data_%s_%s_branches_id_%s_final.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
 		"new_ucb_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
@@ -64,7 +64,7 @@ if (__name__ == "__main__"):
 
 	print(sum(df_inf_data.correct_branch_1.values)/len(df_inf_data.correct_branch_1.values), sum(df_inf_data.correct_branch_2.values)/len(df_inf_data.correct_branch_2.values))
 
-	print(sum(df.correct_branch_1.values)/len(df.correct_branch_1.values), sum(df.correct_branch_2.values)/len(df.correct_branch_2.values))
+	#print(sum(df.correct_branch_1.values)/len(df.correct_branch_1.values), sum(df.correct_branch_2.values)/len(df.correct_branch_2.values))
 
 
 	sys.exit()
