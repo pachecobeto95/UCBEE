@@ -28,7 +28,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   linestyle_list = ["solid", "dashed", "dotted"]
 
   fig, ax = plt.subplots()
-
+  print(df_random_blur.distortion_lvl.unique())
 
   plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine", color="red", 
     linestyle=linestyle_list[0])
