@@ -5,7 +5,8 @@ import os, sys, random, argparse, itertools, logging
 
 
 def reward_function_1(conf_branch, delta_conf, arm, overhead):  
-  return max(delta_conf, 0) - overhead if (conf_branch < arm) else conf_branch 
+  #return max(delta_conf, 0) - overhead if (conf_branch < arm) else 0 
+  return (conf_branch+delta_conf) - overhead if (conf_branch < arm) else 0 
 
 def reward_function_2(conf_branch, delta_conf, arm, overhead):  
   return delta_conf - overhead if (conf_branch < arm) else 0 
