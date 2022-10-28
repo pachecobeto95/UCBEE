@@ -60,8 +60,12 @@ if (__name__ == "__main__"):
 
 	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()
 
+	df = df_inf_data[(df_inf_data.distortion_lvl==1) | (df_inf_data.distortion_lvl==2)| (df_inf_data.distortion_lvl==3) | (df_inf_data.distortion_lvl==4)]
 
 	print(sum(df_inf_data.correct_branch_1.values)/len(df_inf_data.correct_branch_1.values), sum(df_inf_data.correct_branch_2.values)/len(df_inf_data.correct_branch_2.values))
+
+	print(sum(df.correct_branch_1.values)/len(df.correct_branch_1.values), sum(df.correct_branch_2.values)/len(df.correct_branch_2.values))
+
 
 	sys.exit()
 
