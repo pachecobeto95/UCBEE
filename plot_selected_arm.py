@@ -61,7 +61,7 @@ def main(args):
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
   distortion_list = [1, 3]
 
-  savePath = os.path.join(savePlotDir, "selected_best_arm")
+  savePath = os.path.join(savePlotDir, "selected_best_arm_%s"%(args.c))
 
   selected_armPlot(df_ucb, overhead_list, distortion_list, args.fontsize, savePath)
 
@@ -77,6 +77,7 @@ if (__name__ == "__main__"):
   parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
   parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration type.')
   parser.add_argument('--fontsize', type=int, default=config.fontsize, help='Font Size.')
+  parser.add_argument('--c', type=int, default=1, help='Font Size.')
 
   args = parser.parse_args()
   main(args)
