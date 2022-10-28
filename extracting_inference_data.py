@@ -107,7 +107,7 @@ def main(args):
 	ee_model.eval()
 
 	p_tar_list = [0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.]
-	distortion_lvl_list = [1, 2, 3, 4]
+	distortion_lvl_list = [0]
 
 	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, indices_path, 
 		args.calib_type, args.distortion_type, device)
