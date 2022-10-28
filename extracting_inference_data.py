@@ -107,7 +107,7 @@ def main(args):
 	ee_model.load_state_dict(torch.load(model_path, map_location=device)["model_state_dict"])
 	ee_model.eval()
 
-	distortion_lvl_list = [0]
+	distortion_lvl_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4]
 
 	extracting_inference_data(ee_model, distortion_lvl_list, inference_data_path, dataset_path, indices_path, 
 		args.calib_type, args.distortion_type, device)
