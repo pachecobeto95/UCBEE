@@ -2,7 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import os, sys, config, argparse
-
+import statistics
+from statistics import mode
+ 
+def most_common(List):
+    return(mode(List))
+   
+List = [2, 1, 2, 2, 1, 3]
+print(most_common(List))
 def extractedData(df):
 
   df_pristine = df[df.distortion_type == "pristine"] 
@@ -11,7 +18,7 @@ def extractedData(df):
   return df_pristine, df_blur
 
 
-def selected_armPlot(df_ucb, overhead, distortion_list, fontsize, savePath):
+def selected_armPlot(df_ucb, overhead_list, distortion_list, fontsize, savePath):
 
 
   df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
@@ -24,12 +31,17 @@ def selected_armPlot(df_ucb, overhead, distortion_list, fontsize, savePath):
 
   fig, ax = plt.subplots()
 
-  plt.plot(history, df_ucb_pristine.selected_arm.values, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
+  best_arm_list = [mode(df_ucb_pristine[df_ucb_pristine.overhead==overhead].selected_arm.values) for overhead in overhead_list]
+
+
+  plt.plot(overhead_list, best_arm_list, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
+
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
+    best_arm_list = [mode(df_ucb_blur_temp[df_ucb_blur_temp.overhead==overhead].selected_arm.values) for overhead in overhead_list]
     plt.plot(history, df_ucb_blur_temp.selected_arm.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl),
-      color="blue", linestyle=linestyle_list[i])
+      color="red", linestyle=linestyle_list[i])
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
@@ -53,13 +65,9 @@ def main(args):
   #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
   distortion_list = [1, 3]
 
-  for overhead in overhead_list:
+  savePath = os.path.join(savePlotDir, "selected_arm_id_%s"%(round(overhead, 2)) )
 
-    savePath = os.path.join(savePlotDir, "selected_arm_overhead_%s"%(round(overhead, 2)) )
-
-    df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
-
-    selected_armPlot(df_ucb_overhead, overhead, distortion_list, args.fontsize, savePath)
+  selected_armPlot(df_ucb, overhead_list, distortion_list, args.fontsize, savePath)
 
 
 if (__name__ == "__main__"):
