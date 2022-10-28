@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import itertools, argparse, os, sys, random, logging, config
 from tqdm import tqdm
-from ucb import reward_function_1, save_results, compute_correct, save_acc_results
+from ucb import reward_function_1, reward_function_2, save_results, compute_correct, save_acc_results
 
 def get_row_data(row, threshold):
 
@@ -63,8 +63,7 @@ def run_ee_inference_random_threshold(df, threshold_list, overhead, distortion_t
 
 	acc = sum(correct_list)/n_rounds
 	acc_results = {"acc": acc, "overhead": overhead, "distortion_type": distortion_type, "distortion_lvl": distortion_lvl}
-	print("Acc: %s"%(acc))
-	sys.exit()
+
 	result = {"regret": inst_regret_list, 
 	"overhead":[round(overhead, 2)]*n_rounds,
 	"distortion_type": [distortion_type]*n_rounds, 
@@ -81,16 +80,16 @@ def run_random_inference_eval(args, df_inf_data, compute_reward, threshold_list,
 	for distortion_lvl in distortion_values:	
 		df_temp = df[df.distortion_lvl == distortion_lvl]
 
-		for overhead in overhead_list:
+		#for overhead in overhead_list:
 
-			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+		logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 			#print("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
-			results, acc_results = run_ee_inference_random_threshold(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, 
-				args.n_rounds, compute_reward, logPath)
+		_, acc_results = run_ee_inference_random_threshold(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, 
+			args.n_rounds, compute_reward, logPath)
 
-			save_results(results, savePath)
+		#save_results(results, savePath)
 
-			save_acc_results(acc_results, saveUCBAccPath)
+		save_acc_results(acc_results, saveUCBAccPath)
 
 
 if (__name__ == "__main__"):
@@ -110,11 +109,11 @@ if (__name__ == "__main__"):
 	inference_data_path = os.path.join(config.DIR_NAME, "inference_data", args.dataset_name, args.model_name, 
 		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
-	savePath = os.path.join(config.DIR_NAME, "ucb_results", args.dataset_name, args.model_name, 
-		"new_random_results_%s_%s_%s_branches_id_%s_alt.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+	savePath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
+		"new_random_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
-	saveUCBAccPath = os.path.join(config.DIR_NAME, "ucb_results", args.dataset_name, args.model_name, 
-		"acc_random_%s_%s_%s_branches_id_%s_alt.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
+		"acc_random_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	logPath = os.path.join(config.DIR_NAME, "log_random_id_%s.txt"%(args.model_id))
 
@@ -124,9 +123,8 @@ if (__name__ == "__main__"):
 	threshold_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 
 	distortion_values = config.distortion_lvl_dict[args.distortion_type]
-	overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+	overhead_list = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
 
-
-	run_random_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
+	run_random_inference_eval(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)
 
