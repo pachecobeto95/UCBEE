@@ -30,7 +30,7 @@ def selected_armPlot(df_ucb, overhead_list, distortion_list, fontsize, savePath)
   best_arm_list = [mode(df_ucb_pristine[df_ucb_pristine.overhead==overhead].selected_arm.values) for overhead in overhead_list]
 
 
-  plt.plot(overhead_list, best_arm_list, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
+  plt.plot(overhead_list, best_arm_list, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0], marker="o")
 
 
   #for i, distortion_lvl in enumerate(distortion_list, 1):
