@@ -55,7 +55,7 @@ def main(args):
 
   for overhead in overhead_list:
 
-    savePath = os.path.join(savePlotDir, "cumulative_results_overhead_%s"%(round(overhead, 2)) )
+    savePath = os.path.join(savePlotDir, "selected_arm_overhead_%s"%(round(overhead, 2)) )
 
     df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
 
