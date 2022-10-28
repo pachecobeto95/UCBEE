@@ -74,8 +74,7 @@ def get_indices_caltech256(dataset, split_ratio):
 
 
 def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
-	#mean, std = [0.457342265910642, 0.4387686270106377, 0.4073427106250871], [0.26753769276329037, 0.2638145880487105, 0.2776826934044154]
-	mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
+	mean, std = [0.457342265910642, 0.4387686270106377, 0.4073427106250871], [0.26753769276329037, 0.2638145880487105, 0.2776826934044154]
 	torch.manual_seed(args.seed)
 	np.random.seed(seed=args.seed)
 
@@ -109,8 +108,8 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 	val_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 	test_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 
-	train_idx_path = os.path.join(save_indices_path, "a.npy")
-	val_idx_path = os.path.join(save_indices_path, "a.npy")
+	train_idx_path = os.path.join(save_indices_path, "training_idx_caltech256.npy.npy")
+	val_idx_path = os.path.join(save_indices_path, "validation_idx_caltech256.npy")
 	#test_idx_path = os.path.join(save_indices_path, "test_idx_caltech256.npy")
 
 	if( os.path.exists(train_idx_path) ):
