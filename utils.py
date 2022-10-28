@@ -109,8 +109,8 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
 	val_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 	test_set = datasets.ImageFolder(dataset_path, transform=transformations_test)
 
-	train_idx_path = os.path.join(save_indices_path, "training_idx_caltech256_3_branches_%s.npy"%(args.model_id))
-	val_idx_path = os.path.join(save_indices_path, "validation_idx_caltech256_3_branches_%s.npy"%(args.model_id))
+	train_idx_path = os.path.join(save_indices_path, "training_idx_caltech256_%s.npy"%(args.model_id))
+	val_idx_path = os.path.join(save_indices_path, "validation_idx_caltech256_%s.npy"%(args.model_id))
 	#test_idx_path = os.path.join(save_indices_path, "test_idx_caltech256.npy")
 
 	if( os.path.exists(train_idx_path) ):
