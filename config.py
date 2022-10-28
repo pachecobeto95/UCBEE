@@ -24,7 +24,7 @@ split_ratio = 0.1
 
 nr_class_dict = {"caltech256": 257}
 
-dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech256", "256_ObjectCategories"),
+dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech256", "257_ObjectCategories"),
 "cifar10": os.path.join(DIR_NAME,"datasets", "cifar10") }
 
 indices_path_dict = {"caltech256": os.path.join(DIR_NAME, "indices", "caltech256"),
