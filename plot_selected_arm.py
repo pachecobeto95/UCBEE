@@ -52,7 +52,8 @@ def main(args):
   saveDataDir = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet")
   savePlotDir = os.path.join(config.DIR_NAME, "new_plots")
 
-  ucb_filename = os.path.join(saveDataDir, "new_ucb_results_no_calib_mobilenet_1_branches_id_%s_alt.csv"%(args.model_id))
+  ucb_filename = os.path.join(saveDataDir, "new_ucb_results_no_calib_mobilenet_1_branches_id_%s_alt_%s.csv"%(args.model_id,
+    float(args.c)))
 
   df_ucb = pd.read_csv(ucb_filename)
   df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
