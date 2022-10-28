@@ -44,7 +44,8 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 	conf_branches_list = np.array(conf_branches_list)
 	infered_class_branches_list = np.array(infered_class_branches_list)
 	correct_list = np.array(correct_list)
-
+	print(sum(correct_list)/len(correct_list))
+	sys.exit()
 	#results = {"distortion_type": distortion_type, "distortion_lvl": distortion_lvl, "p_tar": [p_tar]*len(target_list), 
 	#"target": target_list, "id": id_list}
 	results = {"distortion_type": [distortion_type]*len(target_list), "distortion_lvl": [distortion_lvl]*len(target_list), 
