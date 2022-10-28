@@ -74,8 +74,8 @@ def get_indices_caltech256(dataset, split_ratio):
 
 
 def load_caltech256(args, dataset_path, save_indices_path, distortion_lvl):
-	mean, std = [0.457342265910642, 0.4387686270106377, 0.4073427106250871], [0.26753769276329037, 0.2638145880487105, 0.2776826934044154]
-
+	#mean, std = [0.457342265910642, 0.4387686270106377, 0.4073427106250871], [0.26753769276329037, 0.2638145880487105, 0.2776826934044154]
+	mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 	torch.manual_seed(args.seed)
 	np.random.seed(seed=args.seed)
 
