@@ -33,11 +33,11 @@ def selected_armPlot(df_ucb, overhead_list, distortion_list, fontsize, savePath)
   plt.plot(overhead_list, best_arm_list, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
 
 
-  for i, distortion_lvl in enumerate(distortion_list, 1):
-    df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    best_arm_list = [mode(df_ucb_blur_temp[df_ucb_blur_temp.overhead==overhead].selected_arm.values) for overhead in overhead_list]
-    plt.plot(overhead_list, best_arm_list, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl),
-      color="red", linestyle=linestyle_list[i])
+  #for i, distortion_lvl in enumerate(distortion_list, 1):
+  #  df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
+  #  best_arm_list = [mode(df_ucb_blur_temp[df_ucb_blur_temp.overhead==overhead].selected_arm.values) for overhead in overhead_list]
+  #  plt.plot(overhead_list, best_arm_list, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl),
+  #    color="red", linestyle=linestyle_list[i])
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
