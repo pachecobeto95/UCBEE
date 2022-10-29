@@ -57,8 +57,8 @@ if (__name__ == "__main__"):
 	threshold_list = np.arange(0, 1.1, 0.2)
 	#overhead_list = np.arange(0, 1.1, config.step_overhead)
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
-	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
-	#overhead_list = [0]
+	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
+	overhead_list = [0]
 	distortion_values_dict = {"pristine": [0], "gaussian_blur": [0.5, 0.8, 1, 2]}
 	distortion_values = distortion_values_dict[args.distortion_type]
 
