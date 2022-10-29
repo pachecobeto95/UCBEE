@@ -30,14 +30,12 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   fig, ax = plt.subplots()
   print(df_random_blur.distortion_lvl.unique())
 
-  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine", color="red", 
-    linestyle=linestyle_list[0])
+  plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
 
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl),
-      color="red", linestyle=linestyle_list[i])
+    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl))
 
 
   #df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
@@ -50,12 +48,11 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   #  plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl),
   #    color="lime", linestyle=linestyle_list[i])
 
-  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
+  plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine")
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl),
-      color="blue", linestyle=linestyle_list[i])
+    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl))
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
