@@ -126,8 +126,3 @@ if (__name__ == "__main__"):
 
 	ee_inference_fixed_threshold(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)
-
-
-
-
-
