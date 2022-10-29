@@ -60,10 +60,6 @@ def run_inference_data(model, test_loader, n_branches, calib_type, distortion_ty
 
 
 def save_result(result, save_path):
-	#df_result = pd.read_csv(save_path) if (os.path.exists(save_path)) else pd.DataFrame()
-	#df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
-	#df_result = df_result.append(df)
-	#df_result.to_csv(save_path)
 	df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
 	df.to_csv(save_path, mode='a', header=not os.path.exists(save_path) )
 
