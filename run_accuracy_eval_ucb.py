@@ -54,7 +54,7 @@ if (__name__ == "__main__"):
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
 
-	threshold_list = [0, 0.2, 0.4, 0.6, 0.8, 0.9, 1]
+	threshold_list = np.arange(0, 1.1, config.step_overhead)
 	#overhead_list = np.arange(0, 1.1, config.step_overhead)
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
@@ -62,5 +62,5 @@ if (__name__ == "__main__"):
 	distortion_values_dict = {"pristine": [0], "gaussian_blur": [0.5, 0.8, 1, 2]}
 	distortion_values = distortion_values_dict[args.distortion_type]
 
-	run_ucb_inference_eval(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
+	run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)
