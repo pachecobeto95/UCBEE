@@ -65,7 +65,7 @@ def save_result(result, save_path):
 	#df_result = df_result.append(df)
 	#df_result.to_csv(save_path)
 	df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
-	df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
+	df.to_csv(save_path, mode='a', header=not os.path.exists(save_path) )
 
 
 def extracting_inference_data(model, distortion_lvl_list, inference_data_path, dataset_path, indices_path, calib_type, distortion_type, device):
