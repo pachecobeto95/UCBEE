@@ -49,7 +49,7 @@ def run_inference_data(model, test_loader, n_branches, calib_type, distortion_ty
 	#results = {"distortion_type": distortion_type, "distortion_lvl": distortion_lvl, "p_tar": [p_tar]*len(target_list), 
 	#"target": target_list, "id": id_list}
 	results = {"distortion_type": [distortion_type]*len(target_list), "distortion_lvl": [distortion_lvl]*len(target_list), 
-	"p_tar": [p_tar]*len(target_list), "target": target_list}
+	"target": target_list}
 	
 	for i in range(n_exits):
 		results.update({"conf_branch_%s"%(i+1): conf_branches_list[:, i],
