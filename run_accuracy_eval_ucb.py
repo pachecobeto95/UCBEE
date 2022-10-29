@@ -15,7 +15,7 @@ def run_ucb_inference_eval(args, df_inf_data, compute_reward, threshold_list, ov
 		df_temp = df[df.distortion_lvl == distortion_lvl]
 
 		for overhead in overhead_list:
-			logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
+			#logging.debug("Distortion Level: %s, Overhead: %s"%(distortion_lvl, overhead))
 
 			results, acc_results = ucb(df_temp, threshold_list, overhead, args.distortion_type, distortion_lvl, args.n_rounds, args.c, 
 				compute_reward, logPath)
@@ -59,8 +59,7 @@ if (__name__ == "__main__"):
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
 	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
 
-	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()
-
+	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()[:-3]
 
 	#run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 	#	logPath)
