@@ -65,7 +65,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
   plt.tight_layout()
-  plt.savefig(savePath + "_less_arms.pdf")
+  plt.savefig(savePath + ".pdf")
 
 
 def main(args):
