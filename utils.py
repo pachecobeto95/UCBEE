@@ -162,7 +162,7 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_values):
 		transforms.Resize((224, 224)),
 		#transforms.CenterCrop((args.dim, args.dim)),
 		#transforms.RandomApply([DistortionApplier2(args.distortion_type, distortion_values)], p=0.5),
-		transforms.Resize(args.dim), 
+		transforms.Resize(224), 
 		transforms.ToTensor(), 
 		transforms.Normalize(mean = mean, std = std),
 		])
