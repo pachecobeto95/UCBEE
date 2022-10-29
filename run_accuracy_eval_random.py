@@ -113,9 +113,8 @@ if (__name__ == "__main__"):
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
 
-	threshold_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-	threshold_list = np.arange(0, 1.1, 0.1)
-	overhead_list = [0]
+	threshold_list = np.arange(0, 1.1, 0.2)
+	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
 
 	distortion_values_dict = {"pristine": [0], "gaussian_blur": [0.5, 0.8, 1, 2]}
 	distortion_values = distortion_values_dict[args.distortion_type]
@@ -128,3 +127,8 @@ if (__name__ == "__main__"):
 
 	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
 		"acc_random_%s_%s_%s_branches_id_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+
+	threshold_list = np.arange(0, 1.1, 0.1)
+
+	run_random_inference_eval(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
+		logPath)
