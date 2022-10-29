@@ -50,9 +50,9 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine")
 
-  for i, distortion_lvl in enumerate(distortion_list, 1):
-    df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl))
+  #for i, distortion_lvl in enumerate(distortion_list, 1):
+  #  df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
+  #  plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl))
 
 
   plt.legend(frameon=False, fontsize=fontsize-4)
@@ -67,7 +67,7 @@ def main(args):
   saveDataDir = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet")
   savePlotDir = os.path.join(config.DIR_NAME, "new_plots")
 
-  ucb_filename = os.path.join(saveDataDir, "new_ucb_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
+  ucb_filename = os.path.join(config.DIR_NAME, "new_ucb_results_final_less_arms", "caltech256", "mobilenet", "new_ucb_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   pristine_fixed_filename = os.path.join(saveDataDir, "new_pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   blur_fixed_filename = os.path.join(saveDataDir, "new_gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   random_filename = os.path.join(saveDataDir, "new_random_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id) )
