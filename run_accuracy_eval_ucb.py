@@ -61,8 +61,8 @@ if (__name__ == "__main__"):
 	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()
 
 
-	run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
-		logPath)
+	#run_ucb_inference_eval(args, df_inf_data, reward_function_1, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
+	#	logPath)
 
 	savePath = os.path.join(config.DIR_NAME, "new_ucb_results_less_arms", args.dataset_name, args.model_name, 
 		"new_ucb_results_%s_%s_%s_branches_id_%s_c_%s_less_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id, int(args.c)))
