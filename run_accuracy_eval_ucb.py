@@ -54,9 +54,10 @@ if (__name__ == "__main__"):
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
 
-	threshold_list = [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1]
+	#threshold_list = [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1]
 	#overhead_list = np.arange(0, 1.1, config.step_overhead)
-	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
+	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
+	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
 
 	distortion_values = df_inf_data[df_inf_data.distortion_type == args.distortion_type].distortion_lvl.unique()
 
