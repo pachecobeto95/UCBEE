@@ -5,7 +5,7 @@ DIR_NAME = os.path.dirname(__file__)
 
 model_id = 1
 c = 1
-n_rounds = 100000
+n_rounds = 200000
 step_arms = 0.2
 step_overhead = 0.1
 cuda = True
