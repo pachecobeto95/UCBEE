@@ -62,6 +62,5 @@ if (__name__ == "__main__"):
 	distortion_values_dict = {"pristine": [0], "gaussian_blur": [0.5, 0.8, 1, 2]}
 	distortion_values = distortion_values_dict[args.distortion_type]
 
-
 	run_ucb_inference_eval(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)

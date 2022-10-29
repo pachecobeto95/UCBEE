@@ -36,7 +36,7 @@ def compute_correct(row, threshold):
 
   if(conf_branch >= threshold):
     correct = row.correct_branch_1.item()
-
+    
   else:
       correct = row.correct_branch_2.item()
 
