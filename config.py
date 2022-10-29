@@ -30,6 +30,7 @@ dataset_path_dict = {"caltech256": os.path.join(DIR_NAME, "datasets", "caltech25
 indices_path_dict = {"caltech256": os.path.join(DIR_NAME, "indices", "caltech256"),
 "cifar10": os.path.join(DIR_NAME,"indices", "cifar10") }
 
-distortion_lvl_dict = {"pristine": [0], "gaussian_blur": [1, 2, 3, 4, 5], "gaussian_noise": [5, 10, 20, 30, 40]}
+distortion_lvl_dict = {"pristine": [0], "gaussian_blur": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5], 
+"gaussian_noise": [5, 10, 20, 30, 40]}
 
 fontsize = 16

@@ -18,9 +18,9 @@ class DistortionApplier(object):
 		image = np.array(img)
 		#blurred_img = cv2.GaussianBlur(image, (4*distortion_lvl+1, 4*distortion_lvl+1), distortion_lvl, None, sigma, cv2.BORDER_CONSTANT)
 		#return Image.fromarray(blurred_img) 
-		kernel_size = (4*distortion_lvl+1, 4*distortion_lvl+1)
-		#kernel_size = int(4*np.floor(distortion_lvl/2)+1) if (distortion_lvl < 1) else 	4*distortion_lvl+1
-		blurrer = transforms.GaussianBlur(kernel_size=kernel_size, sigma=distortion_lvl)
+		#kernel_size = (4*distortion_lvl+1, 4*distortion_lvl+1)
+		kernel_size = int(4*np.floor(distortion_lvl/2)+1) if (distortion_lvl < 1) else 	4*distortion_lvl+1
+		blurrer = transforms.GaussianBlur(kernel_size=(kernel_size, kernel_size), sigma=distortion_lvl)
 		return blurrer(img)
 
 	def gaussian_noise(self, img, distortion_lvl):
@@ -153,7 +153,7 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_values):
 		transforms.RandomHorizontalFlip(p=0.25),
 		transforms.RandomRotation(25),
 		#transforms.RandomApply([transforms.ColorJitter(brightness=(0.80, 1.20))]),
-		#transforms.RandomApply([DistortionApplier2(args.distortion_type, distortion_values)], p=0.5),
+		transforms.RandomApply([DistortionApplier2(args.distortion_type, distortion_values)], p=1),
 		transforms.ToTensor(), 
 		transforms.Normalize(mean = mean, std = std),
 		])
@@ -161,7 +161,7 @@ def load_caltech256(args, dataset_path, save_indices_path, distortion_values):
 	transformations_test = transforms.Compose([
 		transforms.Resize((224, 224)),
 		#transforms.CenterCrop((args.dim, args.dim)),
-		#transforms.RandomApply([DistortionApplier2(args.distortion_type, distortion_values)], p=0.5),
+		transforms.RandomApply([DistortionApplier(args.distortion_type, distortion_values)], p=1),
 		transforms.Resize(224), 
 		transforms.ToTensor(), 
 		transforms.Normalize(mean = mean, std = std),

@@ -5,7 +5,7 @@ from tqdm import tqdm
 import itertools, argparse, os, sys, random, logging, config, torch, torchvision, ee_nn, utils
 
 
-def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distortion_type, distortion_lvl, device):
+def run_inference_data(model, test_loader, n_branches, calib_type, distortion_type, distortion_lvl, device):
 
 	df_result = pd.DataFrame()
 
@@ -44,8 +44,8 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 	conf_branches_list = np.array(conf_branches_list)
 	infered_class_branches_list = np.array(infered_class_branches_list)
 	correct_list = np.array(correct_list)
-	print(sum(correct_list)/len(correct_list))
-	sys.exit()
+	print("Acc: %s"%sum(correct_list)/len(correct_list))
+	#sys.exit()
 	#results = {"distortion_type": distortion_type, "distortion_lvl": distortion_lvl, "p_tar": [p_tar]*len(target_list), 
 	#"target": target_list, "id": id_list}
 	results = {"distortion_type": [distortion_type]*len(target_list), "distortion_lvl": [distortion_lvl]*len(target_list), 
@@ -60,24 +60,26 @@ def run_inference_data(model, test_loader, p_tar, n_branches, calib_type, distor
 
 
 def save_result(result, save_path):
-	df_result = pd.read_csv(save_path) if (os.path.exists(save_path)) else pd.DataFrame()
+	#df_result = pd.read_csv(save_path) if (os.path.exists(save_path)) else pd.DataFrame()
+	#df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
+	#df_result = df_result.append(df)
+	#df_result.to_csv(save_path)
 	df = pd.DataFrame(np.array(list(result.values())).T, columns=list(result.keys()))
-	df_result = df_result.append(df)
-	df_result.to_csv(save_path)
+	df.to_csv(savePath, mode='a', header=not os.path.exists(savePath) )
 
 
-def extracting_inference_data(model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, indices_path, calib_type, distortion_type, device):
+def extracting_inference_data(model, distortion_lvl_list, inference_data_path, dataset_path, indices_path, calib_type, distortion_type, device):
 
 	for distortion_lvl in distortion_lvl_list:
 		print("Distortion Level: %s"%(distortion_lvl))
 
 		_, _, test_loader = utils.load_caltech256(args, dataset_path, indices_path, distortion_lvl)
 
-		for p_tar in p_tar_list:
-			print("p_tar: %s"%(p_tar))
-			result = run_inference_data(model, test_loader, p_tar, args.n_branches, calib_type, distortion_type, distortion_lvl, device)
+		#for p_tar in p_tar_list:
+		#print("p_tar: %s"%(p_tar))
+		result = run_inference_data(model, test_loader, args.n_branches, calib_type, distortion_type, distortion_lvl, device)
 
-			save_result(result, inference_data_path)
+		save_result(result, inference_data_path)
 
 
 
@@ -104,13 +106,13 @@ def main(args):
 	#Load the trained early-exit DNN model.
 	ee_model = ee_model.to(device)
 
+
 	ee_model.load_state_dict(torch.load(model_path, map_location=device)["model_state_dict"])
 	ee_model.eval()
 
-	p_tar_list = [0]
-	distortion_lvl_list = [0]
+	distortion_lvl_list = config.distortion_lvl_dict[args.distortion_type]
 
-	extracting_inference_data(ee_model, p_tar_list, distortion_lvl_list, inference_data_path, dataset_path, indices_path, 
+	extracting_inference_data(ee_model, distortion_lvl_list, inference_data_path, dataset_path, indices_path, 
 		args.calib_type, args.distortion_type, device)
  
 
