@@ -103,10 +103,10 @@ if (__name__ == "__main__"):
 		"no_calib_inference_data_%s_%s_branches_id_%s_final.csv"%(args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
-		"new_random_results_%s_%s_%s_branches_id_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"new_random_results_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
-		"acc_random_%s_%s_%s_branches_id_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+		"acc_random_%s_%s_%s_branches_id_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
 
 	logPath = os.path.join(config.DIR_NAME, "log_random_id_%s.txt"%(args.model_id))
 
@@ -122,3 +122,9 @@ if (__name__ == "__main__"):
 
 	run_random_inference_eval(args, df_inf_data, reward_function_2, threshold_list, overhead_list, distortion_values, savePath, saveUCBAccPath, 
 		logPath)
+
+	savePath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
+		"new_random_results_%s_%s_%s_branches_id_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
+
+	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
+		"acc_random_%s_%s_%s_branches_id_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id))
