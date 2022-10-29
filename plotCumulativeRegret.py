@@ -40,15 +40,15 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
       color="red", linestyle=linestyle_list[i])
 
 
-  df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
-  plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold), color="lime",
-    linestyle=linestyle_list[0])
+  #df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
+  #plt.plot(history, df_fixed_pristine_temp.cumulative_regret.values, label=r"$\alpha=%s$ Pristine"%(threshold), color="lime",
+  #  linestyle=linestyle_list[0])
 
 
-  for i, distortion_lvl in enumerate(distortion_list, 1):
-    df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
-    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl),
-      color="lime", linestyle=linestyle_list[i])
+  #for i, distortion_lvl in enumerate(distortion_list, 1):
+  #  df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
+  #  plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(threshold, distortion_lvl),
+  #    color="lime", linestyle=linestyle_list[i])
 
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine", color="blue", linestyle=linestyle_list[0])
 
@@ -64,7 +64,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   plt.xlabel("Time Horizon", fontsize=fontsize)
   plt.tight_layout()
   plt.savefig(savePath + ".pdf")
-  #plt.savefig(savePath + ".jpg")
+
 
 def main(args):
   saveDataDir = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet")
@@ -78,29 +78,31 @@ def main(args):
   df_ucb = pd.read_csv(ucb_filename)
   df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
 
-  df_fixed_pristine = pd.read_csv(pristine_fixed_filename)
-  df_fixed_pristine = df_fixed_pristine.loc[:, ~df_fixed_pristine.columns.str.contains('^Unnamed')] 
+  #df_fixed_pristine = pd.read_csv(pristine_fixed_filename)
+  #df_fixed_pristine = df_fixed_pristine.loc[:, ~df_fixed_pristine.columns.str.contains('^Unnamed')] 
 
-  df_fixed_blur = pd.read_csv(blur_fixed_filename)
-  df_fixed_blur = df_fixed_blur.loc[:, ~df_fixed_blur.columns.str.contains('^Unnamed')] 
+  #df_fixed_blur = pd.read_csv(blur_fixed_filename)
+  #df_fixed_blur = df_fixed_blur.loc[:, ~df_fixed_blur.columns.str.contains('^Unnamed')] 
 
   df_random = pd.read_csv(random_filename)
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
   overhead_list = df_ucb.overhead.unique()
-  #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
-  distortion_list = [1, 3]
+  distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
+  #distortion_list = [1, 3]
 
   for overhead in overhead_list:
 
     savePath = os.path.join(savePlotDir, "cumulative_results_overhead_%s"%(round(overhead, 2)) )
 
     df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
-    df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
-    df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
+    #df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
+    #df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
     df_random_overhead = df_random[df_random.overhead == overhead]
 
-    cumulativeRegretPlot(df_ucb_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead, 
+    #cumulativeRegretPlot(df_ucb_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead, 
+    #  df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
+    cumulativeRegretPlot(df_ucb_overhead, 0, 0, 
       df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
