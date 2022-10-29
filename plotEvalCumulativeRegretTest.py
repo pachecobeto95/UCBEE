@@ -13,7 +13,7 @@ def extractedData(df):
   return df_pristine
 
 
-def cumulativeRegretPlot(df_ucb, df_ucb2, df_random, df_ucb_mp, df_ucb2_mp, df_random_mp, args.fontsize, savePath):
+def cumulativeRegretPlot(df_ucb, df_ucb2, df_random, df_ucb_mp, df_ucb2_mp, df_random_mp, fontsize, savePath):
 
 
   nr_samples = len(df_ucb.cumulative_regret.values)
