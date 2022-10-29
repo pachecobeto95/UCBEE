@@ -8,17 +8,22 @@ import os, sys, config, argparse
 def extractedData(df):
 
   df_pristine = df[df.distortion_type == "pristine"] 
-  df_blur = df[df.distortion_type == "gaussian_blur"]
+  #df_blur = df[df.distortion_type == "gaussian_blur"]
 
-  return df_pristine, df_blur
+  return df_pristine
 
 
 def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, overhead, distortion_list, fontsize, savePath):
 
 
-  df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
+  #df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
 
-  df_random_pristine, df_random_blur = extractedData(df_random)
+  #df_random_pristine, df_random_blur = extractedData(df_random)
+
+
+  df_ucb_pristine = extractedData(df_ucb)
+
+  df_random_pristine = extractedData(df_random)
 
   nr_samples = len(df_ucb_pristine.cumulative_regret.values)
   threshold = 0.8
@@ -28,14 +33,14 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
   linestyle_list = ["solid", "dashed", "dotted"]
 
   fig, ax = plt.subplots()
-  print(df_random_blur.distortion_lvl.unique())
+  #print(df_random_blur.distortion_lvl.unique())
 
   plt.plot(history, df_random_pristine.cumulative_regret.values, label="Random Pristine")
 
 
-  for i, distortion_lvl in enumerate(distortion_list, 1):
-    df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl))
+  #for i, distortion_lvl in enumerate(distortion_list, 1):
+  #  df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
+  #  plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl))
 
 
   #df_fixed_pristine_temp = df_fixed_pristine[df_fixed_pristine.threshold==threshold]
@@ -67,9 +72,9 @@ def main(args):
   saveDataDir = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet")
   savePlotDir = os.path.join(config.DIR_NAME, "new_plots")
 
-  ucb_filename = os.path.join(config.DIR_NAME, "new_ucb_results_final_less_arms", "caltech256", "mobilenet", "new_ucb_results_no_calib_mobilenet_1_branches_id_%s_c_1_less_arms.csv"%(args.model_id))
-  pristine_fixed_filename = os.path.join(saveDataDir, "new_pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
-  blur_fixed_filename = os.path.join(saveDataDir, "new_gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
+  ucb_filename = os.path.join(saveDataDir, "new_ucb_results_no_calib_mobilenet_1_branches_id_%s_c_%s.csv"%(args.model_id, int(args.c) ))
+  #pristine_fixed_filename = os.path.join(saveDataDir, "new_pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
+  #blur_fixed_filename = os.path.join(saveDataDir, "new_gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
   random_filename = os.path.join(saveDataDir, "new_random_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id) )
 
   df_ucb = pd.read_csv(ucb_filename)
