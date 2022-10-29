@@ -36,7 +36,7 @@ def compute_correct(row, threshold):
 
   if(conf_branch >= threshold):
     correct = row.correct_branch_1.item()
-    
+
   else:
       correct = row.correct_branch_2.item()
 
@@ -107,7 +107,7 @@ def ucb(df, threshold_list, overhead, distortion_type, distortion_lvl, n_rounds,
 
     avg_reward_actions = np.array([sum(reward_actions[i])/n_actions[i] for i in range(nr_arms)])
 
-    optimal_reward = max(conf_branch, delta_conf - overhead)
+    optimal_reward = max(0, delta_conf - overhead)
 
     inst_regret = optimal_reward - reward
     cumulative_regret += inst_regret
