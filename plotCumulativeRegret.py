@@ -119,6 +119,7 @@ if (__name__ == "__main__"):
   parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
   parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration type.')
   parser.add_argument('--fontsize', type=int, default=config.fontsize, help='Font Size.')
+  parser.add_argument('--c', type=int, default=config.c, help='Font Size.')
 
   args = parser.parse_args()
   main(args)
