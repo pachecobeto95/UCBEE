@@ -85,8 +85,8 @@ def main(args):
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
   overhead_list = df_ucb.overhead.unique()
-  distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
-  #distortion_list = [1, 3]
+  #distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
+  distortion_list = [0.5, 1]
 
   for overhead in overhead_list:
 
