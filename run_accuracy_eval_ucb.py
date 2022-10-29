@@ -44,17 +44,17 @@ if (__name__ == "__main__"):
 		"%s_inference_data_%s_%s_branches_id_%s.csv"%(args.calib_type, args.distortion_type, args.n_branches, args.model_id))
 
 	savePath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
-		"new_ucb_results_%s_%s_%s_branches_id_%s_c_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id, int(args.c)))
+		"new_ucb_results_%s_%s_%s_branches_id_%s_c_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id, int(args.c)))
 
 	saveUCBAccPath = os.path.join(config.DIR_NAME, "new_ucb_results", args.dataset_name, args.model_name, 
-		"acc_ucb_%s_%s_%s_branches_id_%s_c_%s.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id, int(args.c)))
+		"acc_ucb_%s_%s_%s_branches_id_%s_c_%s_more_arms.csv"%(args.calib_type, args.model_name, args.n_branches, args.model_id, int(args.c)))
 
 	logPath = os.path.join(config.DIR_NAME, "logAccUCB_id_%s.txt"%(args.model_id))
 
 	df_inf_data = pd.read_csv(inference_data_path)
 	df_inf_data = df_inf_data.loc[:, ~df_inf_data.columns.str.contains('^Unnamed')]
 
-	threshold_list = np.arange(0, 1.1, 0.2)
+	threshold_list = np.arange(0, 1.1, 0.1)
 	#overhead_list = np.arange(0, 1.1, config.step_overhead)
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15, 0.18, 0.2, 0.23, 0.25, 0.28, 0.3]
 	#overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
