@@ -19,7 +19,7 @@ class DistortionApplier(object):
 		#blurred_img = cv2.GaussianBlur(image, (4*distortion_lvl+1, 4*distortion_lvl+1), distortion_lvl, None, sigma, cv2.BORDER_CONSTANT)
 		#return Image.fromarray(blurred_img) 
 		#kernel_size = (4*distortion_lvl+1, 4*distortion_lvl+1)
-		kernel_size = int(4*np.floor(distortion_lvl/2)+1) if (distortion_lvl < 1) else 	4*distortion_lvl+1
+		kernel_size = int(4*np.ceil(distortion_lvl/2)+1) if (distortion_lvl < 1) else 	4*distortion_lvl+1
 		blurrer = transforms.GaussianBlur(kernel_size=(kernel_size, kernel_size), sigma=distortion_lvl)
 		return blurrer(img)
 
