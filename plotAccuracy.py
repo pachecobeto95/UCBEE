@@ -66,7 +66,7 @@ def main(args):
   
 		df_fixed_overhead = df_fixed[df_fixed.overhead == overhead]
 
-	plotEarlyExitAccuracy(df_ucb_overhead, df_random_overhead, df_fixed_overhead, overhead, savePath)
+		plotEarlyExitAccuracy(df_ucb_overhead, df_random_overhead, df_fixed_overhead, overhead, savePath)
 
 
 if (__name__ == "__main__"):
