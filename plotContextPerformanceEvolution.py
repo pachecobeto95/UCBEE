@@ -85,16 +85,16 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
 	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
 
-	plt.plot(history_pristine, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
+	plt.plot(history, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
 		linestyle="solid")
 
-	plt.plot(history_light_blur, df_light_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
+	plt.plot(history, df_light_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
 		linestyle="dashed")
 
-	plt.plot(history_int_blur, df_int_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
+	plt.plot(history, df_int_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
 		linestyle="dashed")
 
-	plt.plot(history_hard_blur, df_hard_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
+	plt.plot(history, df_hard_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
 		linestyle="dashdot")
 
 
