@@ -15,7 +15,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
 
-	nr_samples = 10000
+	nr_samples = 5000
 
 	nr_distortion = len(distortion_list) + 1
 
