@@ -8,9 +8,9 @@ import os, sys, config, argparse
 def extractedData(df):
 
   df_pristine = df[df.distortion_type == "pristine"] 
-  #df_blur = df[df.distortion_type == "gaussian_blur"]
+  df_blur = df[df.distortion_type == "gaussian_blur"]
 
-  return df_pristine
+  return df_pristine, df_blur
 
 
 def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, overhead, distortion_list, fontsize, savePath):
