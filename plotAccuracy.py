@@ -58,7 +58,7 @@ def main(args):
 	overhead_list = df_ucb.overhead.unique()
 
 	for overhead in overhead_list:
-		savePath = os.path.join(savePlotDir, "acc_overhead_%s_c_%s_%s.jpg"%(round(overhead, 2), args.c, args.filenameSufix) )
+		savePath = os.path.join(savePlotDir, "acc_overhead_%s_c_%s_%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
 
