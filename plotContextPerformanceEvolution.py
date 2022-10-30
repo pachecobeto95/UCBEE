@@ -39,7 +39,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 	df_pristine = df_pristine.iloc[0:n_epochs_context, :]
 	df_light_blur = df_light_blur.iloc[n_epochs_context: 2*n_epochs_context, :]
 	df_int_blur = df_int_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
-	df_hard_blur = df_light_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+	df_hard_blur = df_hard_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
 
 
 	plt.plot(history_pristine, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
