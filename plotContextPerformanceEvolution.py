@@ -59,7 +59,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 	plt.xlabel(r"Blur Level $(\sigma)$", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
-	plt.ylim(0.6, 0.85)
+	plt.ylim(0.5, 0.9)
 	plt.tight_layout()
 	plt.savefig(savePath+".pdf")
 
