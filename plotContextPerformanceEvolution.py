@@ -25,7 +25,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 
 	fig, ax = plt.subplots()
 
-	n_epochs_context = int(n_samples/nr_distortion)
+	n_epochs_context = int(nr_samples/nr_distortion)
 
 	history_pristine, history_light_blur = history[:n_epochs_context], history[n_epochs_context:2*n_epochs_context] 
 	history_int_blur, history_hard_blur = history[2*n_epochs_context: 3*n_epochs_context], history[3*n_epochs_context:]
