@@ -50,7 +50,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
       color="lime", linestyle=linestyle_list[i])
 
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine", color="blue",
-    linestyle=linestyle_list[i])
+    linestyle=linestyle_list[0])
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]

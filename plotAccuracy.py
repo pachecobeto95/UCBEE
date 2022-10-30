@@ -23,7 +23,7 @@ def plotEarlyExitAccuracy(df_ucb, df_random, df_fixed, overhead, savePath, fonts
 	fig, ax = plt.subplots()
 
 	plt.plot(distortion_list, random_data, marker="o", label="Random", color="red", linestyle="dashed")
-	plt.plot(distortion_list, fixed_data, marker="v", label=r"$\alpha=0.8$", linestyle="dotted")
+	plt.plot(distortion_list, fixed_data, marker="v", label=r"$\alpha=0.8$", color="lime", linestyle="dotted")
 	plt.plot(distortion_list, ucb_data, marker="x", label="AdaEE", color="blue", linestyle="solid")
 
 	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
@@ -31,6 +31,7 @@ def plotEarlyExitAccuracy(df_ucb, df_random, df_fixed, overhead, savePath, fonts
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
 	plt.ylim(0, 0.8)
+	plt.tight_layout()
 	plt.savefig(savePath+".pdf")
 	#plt.savefig(savePath+".jpg")
 
