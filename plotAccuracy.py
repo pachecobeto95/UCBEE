@@ -4,64 +4,70 @@ import pandas as pd
 import os, sys, config, argparse
 
 def extractedData(df):
+  return df[df.distortion_type == "pristine"], df[df.distortion_type == "gaussian_blur"]
 
-	df_pristine = df[df.distortion_type == "pristine"] 
-	df_blur = df[df.distortion_type == "gaussian_blur"]
-
-	return df_pristine, df_blur
-
-def plot_accuracy(df_ucb, df_fixed, df_fixed_blur, df_random, overhead, distortion_list, args.fontsize, savePath)
+def plotEarlyExitAccuracy(df_ucb, df_random, df_fixed, overhead, savePath, fontsize=18):
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
-
+	df_fixed_pristine, df_fixed_blur = extractedData(df_fixed)
 	df_random_pristine, df_random_blur = extractedData(df_random)
 
-	df_fixed_pristine, df_fixed_blur = extractedData(df_random)
+	distortion_list = df_ucb_blur.distortion_lvl.unique()
+
+	distortion_list = [0] + list(distortion_list)
+
+	random_data = [df_random_pristine.acc.item()] + list(df_random_blur.acc.values)
+	ucb_data = [df_ucb_pristine.acc.item()] + list(df_ucb_blur.acc.values)
+	fixed_data = [df_fixed_pristine[df_fixed_pristine.threshold==0.7].acc.item()] + list(df_fixed_blur[df_fixed_blur.threshold==0.7].acc.values)
 
 	fig, ax = plt.subplots()
 
-	plt.plot()
+	plt.plot(distortion_list, random_data, marker="o", label="Random", color="red", linestyle="dashed")
+	plt.plot(distortion_list, fixed_data, marker="v", label=r"$\alpha=0.8$", linestyle="dotted")
+	plt.plot(distortion_list, ucb_data, marker="x", label="AdaEE", color="blue", linestyle="solid")
 
+	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
+	plt.xlabel(r"Blur Level $(\sigma)$", fontsize = fontsize)
+	plt.legend(frameon=False, fontsize=fontsize)
+	ax.tick_params(axis='both', which='major', labelsize=fontsize)
+	plt.ylim(0, 0.8)
+	plt.savefig(savePath+".pdf")
+	#plt.savefig(savePath+".jpg")
 
 
 def main(args):
-	saveDataDir = os.path.join(config.DIR_NAME, "ucb_results", "caltech256", "mobilenet")
-	savePlotDir = os.path.join(config.DIR_NAME, "plots", "accuracy")
+	ucb_filename = os.path.join(config.DIR_NAME, , "new_ucb_results", "caltech256", "mobilenet",
+		"acc_ucb_no_calib_mobilenet_%s_branches_id_%s_c_%s%s.csv"%(args.n_branches, args.model_id, args.c, args.filenameSufix))
+	fixed_filename = os.path.join(config.DIR_NAME, 
+		"acc_fixed_no_calib_mobilenet_%s_branches_id_%s.csv"%(args.n_branches, args.model_id))
+	random_filename = os.path.join(config.DIR_NAME, 
+		"acc_random_no_calib_mobilenet_%s_branches_id_%s%s.csv"%(args.n_branches, args.model_id, args.filenameSufix))
 
-	if (not os.path.exists(savePlotDir)):
-		os.mkdir(savePlotDir)
+	savePlotDir = os.path.join(config.DIR_NAME, "new_plots")
 
-	ucb_filename = os.path.join(saveDataDir, "acc_ucb_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
-	fixed_filename = os.path.join(saveDataDir, "acc_fixed_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
-	random_filename = os.path.join(saveDataDir, "acc_random_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id) )
 
 	df_ucb = pd.read_csv(ucb_filename)
 	df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
 
-	df_fixed_pristine = pd.read_csv(pristine_fixed_filename)
-	df_fixed_pristine = df_fixed_pristine.loc[:, ~df_fixed_pristine.columns.str.contains('^Unnamed')] 
-
-	df_fixed_blur = pd.read_csv(blur_fixed_filename)
-	df_fixed_blur = df_fixed_blur.loc[:, ~df_fixed_blur.columns.str.contains('^Unnamed')] 
+	df_fixed = pd.read_csv(fixed_filename)
+	df_fixed = df_fixed.loc[:, ~df_fixed.columns.str.contains('^Unnamed')] 
 
 	df_random = pd.read_csv(random_filename)
-	df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
+	df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')] 
 
-	overhead_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-	#distortion_list = df_ucb[df_ucb.distortion_type == "gaussian_blur"].distortion_lvl.unique()
-	distortion_list = [1, 2, 3, 4]
+	overhead_list = df_ucb.overhead.unique()
 
 	for overhead in overhead_list:
-		savePath = os.path.join(savePlotDir, "acc_results_overhead_%s"%(overhead))
-
+		savePath = os.path.join(savePlotDir, "acc_overhead_%s_c_%s_%s.jpg"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
-		df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
-		df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
-		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		plot_accuracy(df_ucb_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead, 
-			df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
+		df_random_overhead = df_random[df_random.overhead == overhead]
+  
+		df_fixed_overhead = df_fixed[df_fixed.overhead == overhead]
+
+	plotEarlyExitAccuracy(df_ucb_overhead, df_random_overhead, df_fixed_overhead, overhead, savePath)
+
 
 if (__name__ == "__main__"):
 
@@ -74,6 +80,9 @@ if (__name__ == "__main__"):
 	parser.add_argument('--seed', type=int, default=config.seed, help='Seed.')
 	parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration type.')
 	parser.add_argument('--fontsize', type=int, default=config.fontsize, help='Font Size.')
+	parser.add_argument('--c', type=int, default=config.c, help='Font Size.')
+	parser.add_argument('--filenameSufix', type=str, default="", 
+		choices=["", "_more_arms"], help='Choose the File of Data to plot.')
 
 	args = parser.parse_args()
 	main(args)
