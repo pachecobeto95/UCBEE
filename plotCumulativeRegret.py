@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os, sys, config, argparse
 
-#df_random = df_random[(df_random.distortion_type == "pristine") & (df_random.overhead == overhead)]
-
 def extractedData(df):
 
   df_pristine = df[df.distortion_type == "pristine"] 
