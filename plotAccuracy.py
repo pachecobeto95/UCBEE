@@ -36,7 +36,7 @@ def plotEarlyExitAccuracy(df_ucb, df_random, df_fixed, overhead, savePath, fonts
 
 
 def main(args):
-	ucb_filename = os.path.join(config.DIR_NAME, , "new_ucb_results", "caltech256", "mobilenet",
+	ucb_filename = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet",
 		"acc_ucb_no_calib_mobilenet_%s_branches_id_%s_c_%s%s.csv"%(args.n_branches, args.model_id, args.c, args.filenameSufix))
 	fixed_filename = os.path.join(config.DIR_NAME, 
 		"acc_fixed_no_calib_mobilenet_%s_branches_id_%s.csv"%(args.n_branches, args.model_id))
