@@ -64,6 +64,49 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 	plt.savefig(savePath+".pdf")
 
 
+def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, savePath):
+
+	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
+
+	nr_samples = len(df_ucb_pristine.cumulative_regret.values)
+
+	nr_distortion = len(distortion_list) + 1
+
+	history = np.arange(1, nr_samples + 1)
+
+	linestyle_list = ["solid", "dashed", "dotted"]
+
+	fig, ax = plt.subplots()
+
+	n_epochs_context = int(nr_samples/nr_distortion)
+
+	df_pristine = df_ucb[df_ucb.distortion_type=="pristine"]
+	df_light_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[0])]
+	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
+	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
+
+	plt.plot(history_pristine, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
+		linestyle="solid")
+
+	plt.plot(history_light_blur, df_light_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
+		linestyle="dashed")
+
+	plt.plot(history_int_blur, df_int_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
+		linestyle="dashed")
+
+	plt.plot(history_hard_blur, df_hard_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
+		linestyle="dashdot")
+
+
+	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
+	plt.xlabel(r"Blur Level $(\sigma)$", fontsize = fontsize)
+	plt.legend(frameon=False, fontsize=fontsize)
+	ax.tick_params(axis='both', which='major', labelsize=fontsize)
+	plt.ylim(0, 0.8)
+	plt.tight_layout()
+	plt.savefig(savePath+".pdf")
+
+
 def main(args):
 	saveDataDir = os.path.join(config.DIR_NAME, "new_ucb_results", "caltech256", "mobilenet")
 	savePlotDir = os.path.join(config.DIR_NAME, "new_plots")
