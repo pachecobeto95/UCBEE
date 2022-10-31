@@ -56,7 +56,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 
 
 	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
-	plt.xlabel(r"Blur Level $(\sigma)$", fontsize = fontsize)
+	plt.xlabel("Time Horizon", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
 	plt.ylim(0.5, 0.9)
@@ -99,7 +99,7 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 
 
 	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
-	plt.xlabel(r"Blur Level $(\sigma)$", fontsize = fontsize)
+	plt.xlabel("Time Horizon", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
 	plt.ylim(0, 0.8)
