@@ -55,7 +55,7 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 		linestyle="dashdot")
 
 
-	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
+	plt.ylabel("Overall Accuracy", fontsize = fontsize)
 	plt.xlabel("Time Horizon", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
@@ -98,7 +98,7 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 		linestyle="dashdot")
 
 
-	plt.ylabel("Early-exit Accuracy", fontsize = fontsize)
+	plt.ylabel("Overall Accuracy", fontsize = fontsize)
 	plt.xlabel("Time Horizon", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
