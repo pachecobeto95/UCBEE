@@ -20,11 +20,11 @@ def extractBestArm(df, i):
 	else:
 		return best_arms.item()
 
-def bestArmEvolutionPlot(df, overhead, distortion_list, fontsize, savePath):
+def bestArmEvolutionPlot(df, nr_samples, overhead, distortion_list, fontsize, savePath):
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df)
 
-	nr_samples = len(df_ucb_pristine)
+	df = df.iloc[:nr_samples]
 
 	nr_distortion = len(distortion_list) + 1
 
@@ -90,7 +90,7 @@ def main(args):
 			"distorted_best_arm_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
-		bestArmEvolutionPlot(df_ucb_overhead, overhead, distortion_list, args.fontsize, savePath)
+		bestArmEvolutionPlot(df_ucb_overhead, args.nr_samples, overhead, distortion_list, args.fontsize, savePath)
 
 
 
@@ -116,6 +116,7 @@ if (__name__ == "__main__"):
 	parser.add_argument('--calib_type', type=str, default="no_calib", help='Calibration type.')
 	parser.add_argument('--fontsize', type=int, default=config.fontsize, help='Font Size.')
 	parser.add_argument('--c', type=int, default=config.c, help='Font Size.')
+	parser.add_argument('--nr_samples', type=int, default=1000, help='Nr Samples.')
 	parser.add_argument('--filenameSufix', type=str, default="", 
 		choices=["", "_more_arms"], help='Choose the File of Data to plot.')
 
