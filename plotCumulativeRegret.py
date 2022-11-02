@@ -55,7 +55,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
     plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE, $\sigma=%s$"%(distortion_lvl),
       color="blue", linestyle=linestyle_list[i])
 
-  plt.legend(frameon=False, fontsize=fontsize-4, ncol=2)
+  plt.legend(frameon=False, fontsize=fontsize-5)
   ax.tick_params(axis='both', which='major', labelsize=fontsize)
   plt.ylabel("Cumulative Regret", fontsize=fontsize)
   plt.xlabel("Time Horizon", fontsize=fontsize)
