@@ -65,7 +65,7 @@ def bestArmEvolutionPlot(df, nr_samples, overhead, distortion_list, fontsize, sa
 	plt.xlabel("Time Horizon", fontsize = fontsize)
 	plt.legend(frameon=False, fontsize=fontsize)
 	ax.tick_params(axis='both', which='major', labelsize=fontsize)
-	plt.ylim(0, 0.8)
+	plt.ylim(0, 1)
 	plt.tight_layout()
 	plt.savefig(savePath+".pdf")
 
