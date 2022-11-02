@@ -100,6 +100,12 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
 	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
 
+
+	df_pristine = df_pristine.iloc[0:nr_samples, :]
+	df_light_blur = df_light_blur.iloc[0:nr_samples, :]
+	df_int_blur = df_int_blur.iloc[0:nr_samples, :]
+	df_hard_blur = df_hard_blur.iloc[0:nr_samples, :]
+
 	plt.plot(history, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
 		linestyle="solid")
 
