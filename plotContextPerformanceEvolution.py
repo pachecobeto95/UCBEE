@@ -56,20 +56,16 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 
 	df_light_blur2 = df_light_blur.iloc[0:n_epochs_context, :]
 	df_pristine2 = df_pristine.iloc[n_epochs_context: 2*n_epochs_context, :]
-	df_hard_blur1 = df_hard_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
-	df_int_blur1 = df_int_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+	df_hard_blur2= df_hard_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
+	df_int_blur2 = df_int_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
 
-	plt.plot(history_pristine, df_pristine1.acc_by_epoch.values, label="Pristine", color="blue", 
-		linestyle="solid")
+	plt.plot(history_pristine, df_pristine2.acc_by_epoch.values, color="blue", linestyle="solid")
 
-	plt.plot(history_light_blur, df_light_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
-		linestyle="dashed")
+	plt.plot(history_light_blur, df_light_blur2.acc_by_epoch.values, color="orange", linestyle="dashed")
 
-	plt.plot(history_int_blur, df_int_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
-		linestyle="dashed")
+	plt.plot(history_int_blur, df_int_blur2.acc_by_epoch.values, color="black", linestyle="dashed")
 
-	plt.plot(history_hard_blur, df_hard_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
-		linestyle="dashdot")
+	plt.plot(history_hard_blur, df_hard_blur2.acc_by_epoch.values, color="magenta", linestyle="dashdot")
 
 
 
