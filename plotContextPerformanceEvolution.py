@@ -83,7 +83,7 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
 
-	nr_samples = len(df_ucb_pristine.cumulative_regret.values)
+	nr_samples = 1000
 
 	nr_distortion = len(distortion_list) + 1
 
@@ -146,7 +146,7 @@ def main(args):
 		#df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
 		#df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot(df_ucb_overhead, overhead, distortion_list, args.fontsize, savePath)
+		performanceEvolutionPlot2(df_ucb_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
 
