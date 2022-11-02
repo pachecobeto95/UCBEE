@@ -42,7 +42,7 @@ def bestArmEvolutionPlot(df, overhead, distortion_list, fontsize, savePath):
 	df_int_blur = df_ucb_blur[df_ucb_blur.distortion_lvl==distortion_list[1]]
 	df_hard_blur = df_ucb_blur[df_ucb_blur.distortion_lvl==distortion_list[2]]
 
-	for i in history
+	for i in history:
 
 		best_arms_pristine = extractBestArm(df_ucb_pristine, i)
 		best_arms_light_blur = extractBestArm(df_light_blur, i)
