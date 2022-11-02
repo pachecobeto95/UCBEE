@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import os, sys, config, argparse
+import os, sys, config, argparse, random
 
 def extractedData(df):
 
