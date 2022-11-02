@@ -33,7 +33,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_random_blur_temp = df_random_blur[df_random_blur.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random Blur $\sigma=%s$"%(distortion_lvl), 
+    plt.plot(history, df_random_blur_temp.cumulative_regret.values, label=r"Random, $\sigma=%s$"%(distortion_lvl), 
       color="red", linestyle=linestyle_list[i])
 
 
@@ -44,7 +44,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_fixed_blur_temp = df_fixed_blur[(df_fixed_blur.distortion_lvl==distortion_lvl) & (df_fixed_blur.threshold==threshold)]
-    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$ Blur $\sigma=%s$"%(0.8, distortion_lvl),
+    plt.plot(history, df_fixed_blur_temp.cumulative_regret.values, label=r"$\alpha=%s$, $\sigma=%s$"%(0.8, distortion_lvl),
       color="lime", linestyle=linestyle_list[i])
 
   plt.plot(history, df_ucb_pristine.cumulative_regret.values, label="AdaEE Pristine", color="blue",
@@ -52,7 +52,7 @@ def cumulativeRegretPlot(df_ucb, df_fixed_pristine, df_fixed_blur, df_random, ov
 
   for i, distortion_lvl in enumerate(distortion_list, 1):
     df_ucb_blur_temp = df_ucb_blur[df_ucb.distortion_lvl==distortion_lvl]
-    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE Blur $\sigma=%s$"%(distortion_lvl),
+    plt.plot(history, df_ucb_blur_temp.cumulative_regret.values, label=r"AdaEE, $\sigma=%s$"%(distortion_lvl),
       color="blue", linestyle=linestyle_list[i])
 
   plt.legend(frameon=False, fontsize=fontsize-4)
@@ -87,14 +87,14 @@ def main(args):
   df_random = pd.read_csv(random_filename)
   df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')]
 
-  overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
-
+  #overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
+  overhead_list = [0, 0.05, 0.1]
   #distortion_list = [0.5, 0.8, 1]
   distortion_list = [0.5, 1]
 
   for overhead in overhead_list:
 
-    savePath = os.path.join(savePlotDir, "cumulative_results_overhead_%s_c_%s_%s"%(round(overhead, 2), args.c, args.filenameSufix) )
+    savePath = os.path.join(savePlotDir, "alt_cumulative_results_overhead_%s_c_%s_%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
     df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
     df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
