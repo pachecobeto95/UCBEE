@@ -29,8 +29,6 @@ def extractHistoryData(df, n_epochs_context, distortion_list):
 
 def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
 
-	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
-
 	nr_samples = 1000
 
 	nr_distortion = len(distortion_list) + 1
@@ -142,7 +140,7 @@ def main(args):
 	df_ucb = pd.read_csv(ucb_filename)
 	df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
 
-	df_random = pd.read_csv(ucb_filename)
+	df_random = pd.read_csv(random_filename)
 	df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')] 
 
 
