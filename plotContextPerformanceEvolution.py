@@ -11,7 +11,23 @@ def extractedData(df):
 
 	return df_pristine, df_blur
 
-def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePath):
+
+def extractHistoryData(df, n_epochs_context):
+
+	df_pristine = df_ucb[df_ucb.distortion_type=="pristine"]
+	df_light_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[0])]
+	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
+	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
+
+
+	df_pristine = df_pristine.iloc[0:n_epochs_context, :]
+	df_light_blur = df_light_blur.iloc[n_epochs_context: 2*n_epochs_context, :]
+	df_int_blur = df_int_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
+	df_hard_blur = df_hard_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+
+	return df_pristine, df_light_blur, df_int_blur, df_hard_blur
+
+def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
 
@@ -30,44 +46,27 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 	history_pristine, history_light_blur = history[:n_epochs_context], history[n_epochs_context:2*n_epochs_context] 
 	history_int_blur, history_hard_blur = history[2*n_epochs_context: 3*n_epochs_context], history[3*n_epochs_context:]
 
-	df_pristine = df_ucb[df_ucb.distortion_type=="pristine"]
-	df_light_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[0])]
-	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
-	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
+	df_ucb_pristine, df_ucb_light_blur, df_ucb_int_blur, df_ucb_hard_blur = extractHistoryData(df_ucb, n_epochs_context)
+
+	df_random_pristine, df_random_light_blur, df_random_int_blur, df_random_hard_blur = extractHistoryData(df_random, n_epochs_context)
 
 
-	df_pristine1 = df_pristine.iloc[0:n_epochs_context, :]
-	df_light_blur1 = df_light_blur.iloc[n_epochs_context: 2*n_epochs_context, :]
-	df_int_blur1 = df_int_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
-	df_hard_blur1 = df_hard_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+	plt.plot(history_pristine, df_ucb_pristine.acc_by_epoch.values, label="AdaEE", color="blue", linestyle="solid")
 
-	plt.plot(history_pristine, df_pristine1.acc_by_epoch.values, label="Pristine", color="blue", 
-		linestyle="solid")
+	plt.plot(history_light_blur, df_ucb_light_blur.acc_by_epoch.values, color="blue", linestyle="dashed")
 
-	plt.plot(history_light_blur, df_light_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
-		linestyle="dashed")
+	plt.plot(history_int_blur, df_ucb_int_blur.acc_by_epoch.values, color="blue", linestyle="dotted")
 
-	plt.plot(history_int_blur, df_int_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
-		linestyle="dashed")
-
-	plt.plot(history_hard_blur, df_hard_blur1.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
-		linestyle="dashdot")
+	plt.plot(history_hard_blur, df_hard_blur1.acc_by_epoch.values, color="blue", linestyle="dashdot")
 
 
-	df_light_blur2 = df_light_blur.iloc[0:n_epochs_context, :]
-	df_pristine2 = df_pristine.iloc[n_epochs_context: 2*n_epochs_context, :]
-	df_hard_blur2= df_hard_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
-	df_int_blur2 = df_int_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+	plt.plot(history_pristine, df_random_pristine.acc_by_epoch.values, label="Random", color="red", linestyle="solid")
 
-	plt.plot(history_light_blur, df_pristine2.acc_by_epoch.values, color="blue", linestyle="solid")
+	plt.plot(history_light_blur, df_random_light_blur.acc_by_epoch.values, color="red", linestyle="dashed")
 
-	plt.plot(history_pristine, df_light_blur2.acc_by_epoch.values, color="orange", linestyle="dashed")
+	plt.plot(history_int_blur, df_random_int_blur.acc_by_epoch.values, color="red", linestyle="dotted")
 
-	plt.plot(history_hard_blur, df_int_blur2.acc_by_epoch.values, color="black", linestyle="dashed")
-
-	plt.plot(history_int_blur, df_hard_blur2.acc_by_epoch.values, color="magenta", linestyle="dashdot")
-
-
+	plt.plot(history_hard_blur, df_random_hard_blur.acc_by_epoch.values, color="red", linestyle="dashdot")
 
 
 	plt.ylabel("Overall Accuracy", fontsize = fontsize)
@@ -79,9 +78,11 @@ def performanceEvolutionPlot(df_ucb, overhead, distortion_list, fontsize, savePa
 	plt.savefig(savePath+".pdf")
 
 
-def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, savePath):
+def performanceEvolutionPlot2(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
+
+	df_random_pristine, df_random_blur = extractedData(df_random)
 
 	nr_samples = 1000
 
@@ -113,7 +114,7 @@ def performanceEvolutionPlot2(df_ucb, overhead, distortion_list, fontsize, saveP
 		linestyle="dashed")
 
 	plt.plot(history, df_int_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
-		linestyle="dashed")
+		linestyle="dotted")
 
 	plt.plot(history, df_hard_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
 		linestyle="dashdot")
@@ -145,14 +146,14 @@ def main(args):
 	for overhead in overhead_list:
 
 		savePath = os.path.join(savePlotDir, 
-			"alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
+			"random_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
 		#df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
 		#df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
-		#df_random_overhead = df_random[df_random.overhead == overhead]
+		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot2(df_ucb_overhead, overhead, distortion_list, args.fontsize, savePath)
+		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
 
