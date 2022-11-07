@@ -14,10 +14,10 @@ def extractedData(df):
 
 def extractHistoryData(df, n_epochs_context):
 
-	df_pristine = df_ucb[df_ucb.distortion_type=="pristine"]
-	df_light_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[0])]
-	df_int_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[1])]
-	df_hard_blur = df_ucb[(df_ucb.distortion_type=="gaussian_blur") & (df_ucb.distortion_lvl==distortion_list[2])]
+	df_pristine = df_ucb[df.distortion_type=="pristine"]
+	df_light_blur = df[(df.distortion_type=="gaussian_blur") & (df.distortion_lvl==distortion_list[0])]
+	df_int_blur = df[(df.distortion_type=="gaussian_blur") & (df.distortion_lvl==distortion_list[1])]
+	df_hard_blur = df[(df.distortion_type=="gaussian_blur") & (df.distortion_lvl==distortion_list[2])]
 
 
 	df_pristine = df_pristine.iloc[0:n_epochs_context, :]
