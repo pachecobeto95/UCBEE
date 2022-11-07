@@ -12,7 +12,7 @@ def extractedData(df):
 	return df_pristine, df_blur
 
 
-def extractHistoryData(df, n_epochs_context):
+def extractHistoryData(df, n_epochs_context, distortion_list):
 
 	df_pristine = df[df.distortion_type=="pristine"]
 	df_light_blur = df[(df.distortion_type=="gaussian_blur") & (df.distortion_lvl==distortion_list[0])]
@@ -46,9 +46,9 @@ def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fonts
 	history_pristine, history_light_blur = history[:n_epochs_context], history[n_epochs_context:2*n_epochs_context] 
 	history_int_blur, history_hard_blur = history[2*n_epochs_context: 3*n_epochs_context], history[3*n_epochs_context:]
 
-	df_ucb_pristine, df_ucb_light_blur, df_ucb_int_blur, df_ucb_hard_blur = extractHistoryData(df_ucb, n_epochs_context)
+	df_ucb_pristine, df_ucb_light_blur, df_ucb_int_blur, df_ucb_hard_blur = extractHistoryData(df_ucb, n_epochs_context, distortion_list)
 
-	df_random_pristine, df_random_light_blur, df_random_int_blur, df_random_hard_blur = extractHistoryData(df_random, n_epochs_context)
+	df_random_pristine, df_random_light_blur, df_random_int_blur, df_random_hard_blur = extractHistoryData(df_random, n_epochs_context, distortion_list)
 
 
 	plt.plot(history_pristine, df_ucb_pristine.acc_by_epoch.values, label="AdaEE", color="blue", linestyle="solid")
