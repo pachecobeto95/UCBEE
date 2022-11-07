@@ -182,7 +182,7 @@ def main(args):
 		#df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
 		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot2(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
+		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
 
