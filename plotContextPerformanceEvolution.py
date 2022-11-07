@@ -57,7 +57,7 @@ def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fonts
 
 	plt.plot(history_int_blur, df_ucb_int_blur.acc_by_epoch.values, color="blue", linestyle="dotted")
 
-	plt.plot(history_hard_blur, df_hard_blur1.acc_by_epoch.values, color="blue", linestyle="dashdot")
+	plt.plot(history_hard_blur, df_ucb_hard_blur.acc_by_epoch.values, color="blue", linestyle="dashdot")
 
 
 	plt.plot(history_pristine, df_random_pristine.acc_by_epoch.values, label="Random", color="red", linestyle="solid")
