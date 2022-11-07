@@ -29,7 +29,7 @@ def extractHistoryData(df, n_epochs_context, distortion_list):
 
 def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
 
-	nr_samples = 1000
+	nr_samples = 20000
 
 	nr_distortion = len(distortion_list) + 1
 
