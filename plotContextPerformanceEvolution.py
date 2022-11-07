@@ -136,8 +136,15 @@ def main(args):
 	ucb_filename = os.path.join(saveDataDir, 
 		"new_ucb_results_no_calib_mobilenet_1_branches_id_%s_c_%s%s.csv"%(args.model_id, int(args.c), args.filenameSufix))
 
+	random_filename = os.path.join(saveDataDir, 
+		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
+
 	df_ucb = pd.read_csv(ucb_filename)
 	df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
+
+	df_random = pd.read_csv(ucb_filename)
+	df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')] 
+
 
 	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
 
