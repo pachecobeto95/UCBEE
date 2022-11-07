@@ -105,16 +105,40 @@ def performanceEvolutionPlot2(df_ucb, df_random, overhead, distortion_list, font
 	df_int_blur = df_int_blur.iloc[0:nr_samples, :]
 	df_hard_blur = df_hard_blur.iloc[0:nr_samples, :]
 
-	plt.plot(history, df_pristine.acc_by_epoch.values, label="Pristine", color="blue", 
+
+	df_pristine1 = df_random[df_random.distortion_type=="pristine"]
+	df_light_blur1 = df_random[(df_random.distortion_type=="gaussian_blur") & (df_random.distortion_lvl==distortion_list[0])]
+	df_int_blur1 = df_random[(df_random.distortion_type=="gaussian_blur") & (df_random.distortion_lvl==distortion_list[1])]
+	df_hard_blur1 = df_random[(df_random.distortion_type=="gaussian_blur") & (df_random.distortion_lvl==distortion_list[2])]
+
+
+	df_pristine1 = df_pristine1.iloc[0:nr_samples, :]
+	df_light_blur1 = df_light_blur1.iloc[0:nr_samples, :]
+	df_int_blur1 = df_int_blur1.iloc[0:nr_samples, :]
+	df_hard_blur1 = df_hard_blur1.iloc[0:nr_samples, :]
+
+
+	plt.plot(history, df_pristine.acc_by_epoch.values, label="AdaEE", color="blue", 
 		linestyle="solid")
 
-	plt.plot(history, df_light_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[0]), color="orange", 
-		linestyle="dashed")
+	plt.plot(history, df_light_blur.acc_by_epoch.values, color="blue", linestyle="dashed")
 
-	plt.plot(history, df_int_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[1]), color="black", 
+	plt.plot(history, df_int_blur.acc_by_epoch.values, color="blue", 
 		linestyle="dotted")
 
-	plt.plot(history, df_hard_blur.acc_by_epoch.values, label=r"$\sigma=%s$"%(distortion_list[2]), color="magenta", 
+	plt.plot(history, df_hard_blur.acc_by_epoch.values, color="blue", 
+		linestyle="dashdot")
+
+
+	plt.plot(history, df_pristine.acc_by_epoch.values, label="Random", color="red", 
+		linestyle="solid")
+
+	plt.plot(history, df_light_blur.acc_by_epoch.values, color="red", linestyle="dashed")
+
+	plt.plot(history, df_int_blur.acc_by_epoch.values, color="red", 
+		linestyle="dotted")
+
+	plt.plot(history, df_hard_blur.acc_by_epoch.values, color="red", 
 		linestyle="dashdot")
 
 
@@ -158,7 +182,7 @@ def main(args):
 		#df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
 		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
+		performanceEvolutionPlot2(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
 
 
 
