@@ -27,7 +27,7 @@ def extractHistoryData(df, n_epochs_context, distortion_list):
 
 	return df_pristine, df_light_blur, df_int_blur, df_hard_blur
 
-def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
+def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur, overhead, distortion_list, fontsize, savePath):
 
 	nr_samples = 20000
 
@@ -48,6 +48,15 @@ def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fonts
 
 	df_random_pristine, df_random_light_blur, df_random_int_blur, df_random_hard_blur = extractHistoryData(df_random, n_epochs_context, distortion_list)
 
+	df_fixed_light_blur = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[0]]
+	df_fixed_int_blur = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[1]]
+	df_fixed_hard_blur = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[2]]
+
+
+	df_fixed_pristine = df_fixed_pristine.iloc[0:n_epochs_context, :]
+	df_fixed_light_blur = df_fixed_light_blur.iloc[n_epochs_context: 2*n_epochs_context, :]
+	df_fixed_int_blur = df_fixed_int_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
+	df_fixed_hard_blur = df_fixed_hard_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
 
 	plt.plot(history_pristine, df_ucb_pristine.acc_by_epoch.values, label="AdaEE", color="blue", linestyle="solid")
 
@@ -65,6 +74,18 @@ def performanceEvolutionPlot(df_ucb, df_random, overhead, distortion_list, fonts
 	plt.plot(history_int_blur, df_random_int_blur.acc_by_epoch.values, color="red", linestyle="dotted")
 
 	plt.plot(history_hard_blur, df_random_hard_blur.acc_by_epoch.values, color="red", linestyle="dashdot")
+
+	
+
+
+
+	plt.plot(history_pristine, df_fixed_pristine.acc_by_epoch.values, label=r"$\alpha=0.8$", color="lime", linestyle="solid")
+
+	plt.plot(history_light_blur, df_fixed_light_blur.acc_by_epoch.values, color="lime", linestyle="dashed")
+
+	plt.plot(history_int_blur, df_fixed_int_blur.acc_by_epoch.values, color="lime", linestyle="dotted")
+
+	plt.plot(history_hard_blur, df_fixed_hard_blur.acc_by_epoch.values, color="lime", linestyle="dashdot")
 
 
 	plt.ylabel("Overall Accuracy", fontsize = fontsize)
@@ -161,12 +182,27 @@ def main(args):
 	random_filename = os.path.join(saveDataDir, 
 		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
 
+	fixed_filename_pristine = os.path.join(saveDataDir, 
+		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
+
+	fixed_filename_blur = os.path.join(saveDataDir, 
+		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
+
 	df_ucb = pd.read_csv(ucb_filename)
 	df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
 
 	df_random = pd.read_csv(random_filename)
 	df_random = df_random.loc[:, ~df_random.columns.str.contains('^Unnamed')] 
 
+	df_fixed_pristine = pd.read_csv(fixed_filename_pristine)
+	df_fixed_pristine = df_fixed_pristine.loc[:, ~df_fixed_pristine.columns.str.contains('^Unnamed')] 
+
+	df_fixed_blur = pd.read_csv(fixed_filename_blur)
+	df_fixed_blur = df_fixed_blur.loc[:, ~df_fixed_blur.columns.str.contains('^Unnamed')]
+
+	df_fixed_pristine = df_fixed_pristine[df_fixed_pristine.threshold==0.7]
+
+	df_fixed_blur = df_fixed_blur[df_fixed_blur.threshold==0.7]
 
 	overhead_list = [0, 0.05, 0.08, 0.1, 0.13, 0.15]
 
@@ -175,14 +211,15 @@ def main(args):
 	for overhead in overhead_list:
 
 		savePath = os.path.join(savePlotDir, 
-			"random_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
+			"random_alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
-		#df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
-		#df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
+		df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
+		df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
 		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, overhead, distortion_list, args.fontsize, savePath)
+		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead
+			overhead, distortion_list, args.fontsize, savePath)
 
 
 
