@@ -183,10 +183,10 @@ def main(args):
 		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
 
 	fixed_filename_pristine = os.path.join(saveDataDir, 
-		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
+		"new_pristine_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
 
 	fixed_filename_blur = os.path.join(saveDataDir, 
-		"new_random_results_no_calib_mobilenet_1_branches_id_%s%s.csv"%(args.model_id, args.filenameSufix))
+		"new_gaussian_blur_fixed_results_no_calib_mobilenet_1_branches_id_%s.csv"%(args.model_id))
 
 	df_ucb = pd.read_csv(ucb_filename)
 	df_ucb = df_ucb.loc[:, ~df_ucb.columns.str.contains('^Unnamed')] 
