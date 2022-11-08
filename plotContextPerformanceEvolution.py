@@ -97,13 +97,13 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 	plt.savefig(savePath+".pdf")
 
 
-def performanceEvolutionPlot2(df_ucb, df_random, overhead, distortion_list, fontsize, savePath):
+def performanceEvolutionPlot2(df_ucb, df_random, df_fixed_pristine, df_fixed_blur, overhead, distortion_list, fontsize, savePath):
 
 	df_ucb_pristine, df_ucb_blur = extractedData(df_ucb)
 
 	df_random_pristine, df_random_blur = extractedData(df_random)
 
-	nr_samples = 20000
+	nr_samples = 100000
 
 	nr_distortion = len(distortion_list) + 1
 
@@ -139,6 +139,17 @@ def performanceEvolutionPlot2(df_ucb, df_random, overhead, distortion_list, font
 	df_hard_blur1 = df_hard_blur1.iloc[0:nr_samples, :]
 
 
+	df_light_blur2 = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[0]]
+	df_int_blur2 = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[1]]
+	df_hard_blur2 = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[2]]
+
+
+	df_pristine2 = df_fixed_pristine.iloc[0:nr_samples, :]
+	df_light_blur2 = df_light_blur2.iloc[0:nr_samples, :]
+	df_int_blur2 = df_int_blur2.iloc[0:nr_samples, :]
+	df_hard_blur2 = df_hard_blur2.iloc[0:nr_samples, :]
+
+
 	plt.plot(history, df_pristine.acc_by_epoch.values, label="AdaEE", color="blue", 
 		linestyle="solid")
 
@@ -160,6 +171,19 @@ def performanceEvolutionPlot2(df_ucb, df_random, overhead, distortion_list, font
 		linestyle="dotted")
 
 	plt.plot(history, df_hard_blur1.acc_by_epoch.values, color="red", 
+		linestyle="dashdot")
+
+
+
+	plt.plot(history, df_pristine2.acc_by_epoch.values, label="Random", color="lime", 
+		linestyle="solid")
+
+	plt.plot(history, df_light_blur2.acc_by_epoch.values, color="lime", linestyle="dashed")
+
+	plt.plot(history, df_int_blur2.acc_by_epoch.values, color="lime", 
+		linestyle="dotted")
+
+	plt.plot(history, df_hard_blur2.acc_by_epoch.values, color="lime", 
 		linestyle="dashdot")
 
 
