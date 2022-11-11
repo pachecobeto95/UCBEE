@@ -31,6 +31,8 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 	nr_samples = 100000
 
+	offset = 50000
+
 	nr_distortion = len(distortion_list) + 1
 
 	history = np.arange(1, nr_samples + 1)
@@ -39,7 +41,7 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 	fig, ax = plt.subplots()
 
-	n_epochs_context = int(nr_samples/nr_distortion)
+	n_epochs_context = int((nr_samples-offset)/nr_distortion)
 
 	history_pristine, history_light_blur = history[:n_epochs_context], history[n_epochs_context:2*n_epochs_context] 
 	history_int_blur, history_hard_blur = history[2*n_epochs_context: 3*n_epochs_context], history[3*n_epochs_context:]
@@ -53,10 +55,10 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 	df_fixed_hard_blur = df_fixed_blur[df_fixed_blur.distortion_lvl==distortion_list[2]]
 
 
-	df_fixed_pristine = df_fixed_pristine.iloc[0:n_epochs_context, :]
-	df_fixed_light_blur = df_fixed_light_blur.iloc[n_epochs_context: 2*n_epochs_context, :]
-	df_fixed_int_blur = df_fixed_int_blur.iloc[2*n_epochs_context: 3*n_epochs_context, :]
-	df_fixed_hard_blur = df_fixed_hard_blur.iloc[3*n_epochs_context: 4*n_epochs_context, :]
+	df_fixed_pristine = df_fixed_pristine.iloc[offset:offset+n_epochs_context, :]
+	df_fixed_light_blur = df_fixed_light_blur.iloc[offset+n_epochs_context: 2*(offset+n_epochs_context), :]
+	df_fixed_int_blur = df_fixed_int_blur.iloc[2*(offset+n_epochs_context): 3*(offset+n_epochs_context), :]
+	df_fixed_hard_blur = df_fixed_hard_blur.iloc[3*(offset+n_epochs_context): 4*(offset+n_epochs_context), :]
 
 	plt.plot(history_pristine, df_ucb_pristine.acc_by_epoch.values, label="AdaEE", color="blue", linestyle="solid")
 
@@ -235,7 +237,7 @@ def main(args):
 	for overhead in overhead_list:
 
 		savePath = os.path.join(savePlotDir, 
-			"final_random_alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
+			"final2_random_alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
 		df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
