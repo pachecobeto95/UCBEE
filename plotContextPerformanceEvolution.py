@@ -44,7 +44,7 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 	n_epochs_context = int((nr_samples-offset)/nr_distortion)
 
 	history_pristine, history_light_blur = history[offset:(offset+n_epochs_context)], history[(offset+n_epochs_context):(offset+2*n_epochs_context)] 
-	history_int_blur, history_hard_blur = history[2*(offset+n_epochs_context): 3*(offset+n_epochs_context)], history[3*(offset+n_epochs_context):]
+	history_int_blur, history_hard_blur = history[(offset+2*n_epochs_context): (offset+3*n_epochs_context)], history[(offset+3*n_epochs_context):]
 
 	df_ucb_pristine, df_ucb_light_blur, df_ucb_int_blur, df_ucb_hard_blur = extractHistoryData(df_ucb, n_epochs_context, distortion_list)
 
@@ -57,8 +57,8 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 	df_fixed_pristine = df_fixed_pristine.iloc[offset:offset+n_epochs_context, :]
 	df_fixed_light_blur = df_fixed_light_blur.iloc[offset+n_epochs_context: offset+2*n_epochs_context, :]
-	df_fixed_int_blur = df_fixed_int_blur.iloc[2*(offset+n_epochs_context): 3*(offset+n_epochs_context), :]
-	df_fixed_hard_blur = df_fixed_hard_blur.iloc[3*(offset+n_epochs_context): 4*(offset+n_epochs_context), :]
+	df_fixed_int_blur = df_fixed_int_blur.iloc[(offset+2*n_epochs_context): (offset+3*n_epochs_context), :]
+	df_fixed_hard_blur = df_fixed_hard_blur.iloc[(offset+3*n_epochs_context): (offset+4*n_epochs_context), :]
 
 	plt.plot(history_pristine, df_ucb_pristine.acc_by_epoch.values, label="AdaEE", color="blue", linestyle="solid")
 
