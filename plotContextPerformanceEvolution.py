@@ -43,7 +43,7 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 	n_epochs_context = int((nr_samples-offset)/nr_distortion)
 
-	history_pristine, history_light_blur = history[offset:(offset+n_epochs_context)], history[(offset+n_epochs_context):2*(offset+n_epochs_context)] 
+	history_pristine, history_light_blur = history[offset:(offset+n_epochs_context)], history[(offset+n_epochs_context):(offset+2*n_epochs_context)] 
 	history_int_blur, history_hard_blur = history[2*(offset+n_epochs_context): 3*(offset+n_epochs_context)], history[3*(offset+n_epochs_context):]
 
 	df_ucb_pristine, df_ucb_light_blur, df_ucb_int_blur, df_ucb_hard_blur = extractHistoryData(df_ucb, n_epochs_context, distortion_list)
