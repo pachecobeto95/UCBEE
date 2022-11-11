@@ -56,7 +56,7 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 
 	df_fixed_pristine = df_fixed_pristine.iloc[offset:offset+n_epochs_context, :]
-	df_fixed_light_blur = df_fixed_light_blur.iloc[offset+n_epochs_context: 2*(offset+n_epochs_context), :]
+	df_fixed_light_blur = df_fixed_light_blur.iloc[offset+n_epochs_context: offset+2*n_epochs_context, :]
 	df_fixed_int_blur = df_fixed_int_blur.iloc[2*(offset+n_epochs_context): 3*(offset+n_epochs_context), :]
 	df_fixed_hard_blur = df_fixed_hard_blur.iloc[3*(offset+n_epochs_context): 4*(offset+n_epochs_context), :]
 
