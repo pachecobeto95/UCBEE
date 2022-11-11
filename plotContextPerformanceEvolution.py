@@ -175,7 +175,7 @@ def performanceEvolutionPlot2(df_ucb, df_random, df_fixed_pristine, df_fixed_blu
 
 
 
-	plt.plot(history, df_pristine2.acc_by_epoch.values, label="Random", color="lime", 
+	plt.plot(history, df_pristine2.acc_by_epoch.values, label=r"$\alpha=0.8$", color="lime", 
 		linestyle="solid")
 
 	plt.plot(history, df_light_blur2.acc_by_epoch.values, color="lime", linestyle="dashed")
