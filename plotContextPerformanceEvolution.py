@@ -31,7 +31,7 @@ def performanceEvolutionPlot(df_ucb, df_random, df_fixed_pristine, df_fixed_blur
 
 	nr_samples = 100000
 
-	offset = 50000
+	offset = 80000
 
 	nr_distortion = len(distortion_list) + 1
 
