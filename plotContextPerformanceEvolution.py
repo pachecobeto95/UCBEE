@@ -235,14 +235,14 @@ def main(args):
 	for overhead in overhead_list:
 
 		savePath = os.path.join(savePlotDir, 
-			"random_alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
+			"final_random_alt_distorted_evolution_performance_overhead_%s_c_%s%s"%(round(overhead, 2), args.c, args.filenameSufix) )
 
 		df_ucb_overhead = df_ucb[df_ucb.overhead == overhead]
 		df_fixed_pristine_overhead = df_fixed_pristine[df_fixed_pristine.overhead == overhead]
 		df_fixed_blur_overhead = df_fixed_blur[df_fixed_blur.overhead == overhead]
 		df_random_overhead = df_random[df_random.overhead == overhead]
 
-		performanceEvolutionPlot2(df_ucb_overhead, df_random_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead,
+		performanceEvolutionPlot(df_ucb_overhead, df_random_overhead, df_fixed_pristine_overhead, df_fixed_blur_overhead,
 			overhead, distortion_list, args.fontsize, savePath)
 
 
