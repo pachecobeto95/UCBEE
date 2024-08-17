@@ -1,1 +1,1 @@
-# AdaEE: Adaptive Early-Exit DNN Inference Through Multi-Armed Bandits
+# UCBEE: Upper Confidence Bound in Early-Exit Deep Neural Networks
